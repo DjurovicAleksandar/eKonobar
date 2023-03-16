@@ -40,4 +40,8 @@
     background-color: #fcdf07;
     border-radius: 10px;
   }
+  .buttonBack {
+    display: block;
+    margin: 0 auto;
+  }
 }

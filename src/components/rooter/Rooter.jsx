@@ -17,6 +17,13 @@ import Footer from "../navigation-footer/Footer";
 import Navigation from "../navigation-footer/Navigation";
 import ArticleDescription from "../administrator/options/ArticleDescription";
 
+import FoodPanel from "../user/FoodPanel";
+import DrinksPanel from "../user/DrinksPanel";
+import SpecialOffer from "../user/SpecialOffer";
+
+import CarbonatedDrinks from "../menuCategories/carbonatedDrinks";
+import HotDrinks from "../menuCategories/HotDrinks";
+
 const Root = () => {
   const location = useLocation();
   const loginLocation = location.pathname === "/caffe-login";
@@ -41,6 +48,11 @@ const router = createBrowserRouter(
       <Route path="/change-details" element={<DetailsChange />} />
       <Route path="/editing-description" element={<ArticleDescription />} />
       <Route path="/advertising" element={<Advertising />} />
+      <Route path="/food" element={<FoodPanel />} />
+      <Route path="/drinks" element={<DrinksPanel />} />
+      <Route path="/special-offer" element={<SpecialOffer />} />
+      <Route path="/hotdrinks" element={<HotDrinks />} />
+      <Route path="/carbonateddrinks" element={<CarbonatedDrinks />} />
     </Route>
   )
 );
