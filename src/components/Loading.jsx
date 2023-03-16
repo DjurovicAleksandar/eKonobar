@@ -15,7 +15,7 @@ function Loading() {
 
   return (
     <div className="w-full h-screen flex flex-col justify-between items-center pb-12">
-      <div className="">
+      <div>
         <img src={logo} />
       </div>
       <div className="h-[300px]">

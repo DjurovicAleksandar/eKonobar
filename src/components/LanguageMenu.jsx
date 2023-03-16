@@ -9,7 +9,7 @@ function LanguageMenu({ languageChange }) {
   const customStyles = {
     dropdownIndicator: (provided, state) => ({
       ...provided,
-      color: "black", // replace with your desired color
+      color: "black",
     }),
   };
 

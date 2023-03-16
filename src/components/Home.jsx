@@ -15,7 +15,7 @@ function Home() {
       {language ? (
         <LanguageMenu languageChange={languageChange} />
       ) : (
-        <p onClick={languageChange}> Choose language</p>
+        <div></div>
       )}
     </div>
   );
