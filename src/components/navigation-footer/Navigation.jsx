@@ -3,7 +3,7 @@ import navLogo from "../../assets/imgs/navLogo.png";
 
 function Navigation() {
   return (
-    <div className="text-center pt-[50px]">
+    <div className="text-center pt-4">
       <Link to="/">
         <img src={navLogo} />
       </Link>

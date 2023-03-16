@@ -19,18 +19,18 @@ function Panel({ title }) {
     ["Cocktails", cocktail, "/cocktails"],
   ];
   return (
-    <div className="">
-      <div className=" h-[600px] pt-24">
-        <h2 className="text-center text-[23px] font-light mb-5">
+    <div className="h-full flex flex-col justify-between">
+      <div className=" h-[450px] pt-12">
+        <h2 className="text-center text-[20px] font-light mb-3">
           Odab<span className="text-yellowCol">e</span>rite vrstu pića
         </h2>
-        <ul className="w-[350px] text-center">
+        <ul className="w-[320px] text-center">
           {options.map(([title, img, path], index) => {
             return (
               <Link to={path} key={index}>
-                <li className="w-full flex items-center border-[1px] h-[45px] px-[12px] py-[8px] mb-[12px] rounded-md text-[18px] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer">
+                <li className="w-full flex items-center border-[1px] h-[35px] px-[12px] py-[8px] mb-[12px] rounded-md text-[15px] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer">
                   <img
-                    className="w-[25px] mr-2"
+                    className="w-[20px] mr-2"
                     src={img}
                     alt={`${title} icon`}
                   />
@@ -44,8 +44,8 @@ function Panel({ title }) {
       </div>
       <button className="buttonBack hover:scale-110 active:scale-90 cursor-pointer">
         <Link to="/">
-          <img src={back} alt="arrowBack" />
-          <span className="text-[21px]"> Nazad</span>
+          <img src={back} className="w-[20px]" alt="arrowBack" />
+          <span className="text-[15px]"> Nazad</span>
         </Link>
       </button>
     </div>

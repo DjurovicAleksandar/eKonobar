@@ -26,7 +26,7 @@ function App() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="App w-full h-screen flex flex-col justify-between items-center pb-12">
+    <div className="App w-full h-screen flex flex-col items-center justify-between">
       <RouterProvider router={router} />
     </div>
   );

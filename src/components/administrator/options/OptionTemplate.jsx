@@ -59,8 +59,8 @@ function OptionTemplate({ title, colon, menuHandler, saveChangesHandler }) {
   }, []);
 
   return (
-    <div className="px-[18px]">
-      <h2 className="font-light text-[23px] text-center">
+    <div className="mt-2">
+      <h2 className="font-light text-[20px] text-center">
         <span className="text-yellowCol">{title}</span>{" "}
         {title === "Izmjena" && <span>detalja</span>}{" "}
         {title === "Promjena" ? <span>cijene</span> : <span>artikla</span>}
@@ -71,8 +71,9 @@ function OptionTemplate({ title, colon, menuHandler, saveChangesHandler }) {
           menuHandler(e.value);
           setValue(e.value);
         }}
+        s
         styles={customStyles}
-        className="text-black  w-[310px] sm:w-[390px] mb-[50px] mt-[30px]"
+        className="text-black  w-[310px] sm:w-[390px] mb-[20px] mt-[10px]"
         options={options}
         placeholder="Odaberite kategoriju"
         formatOptionLabel={({ label, icon }) => (
@@ -83,7 +84,6 @@ function OptionTemplate({ title, colon, menuHandler, saveChangesHandler }) {
       />
       {value !== "" ? (
         <>
-          {" "}
           <div className="w-[310px] sm:w-[390px] h-[300px] rounded-md overflow-y-scroll">
             {colon}
           </div>
@@ -100,14 +100,14 @@ function OptionTemplate({ title, colon, menuHandler, saveChangesHandler }) {
       ) : (
         <></>
       )}
-      <div className="flex items-center justify-around mt-[20px] mb-[30px]">
+      <div className="flex items-center justify-around mt-[20px] text-[15px]">
         {title === "Promjena" ? (
           <button
             type="submit"
             form="change-price-form"
             className="rounded-md bg-transparent text-center py-[10px] text-white border-[1px] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[120px] "
           >
-            Sacuvaj
+            Sačuvaj
           </button>
         ) : (
           <button
