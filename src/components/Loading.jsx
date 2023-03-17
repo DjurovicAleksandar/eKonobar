@@ -14,11 +14,11 @@ function Loading() {
   }, []);
 
   return (
-    <div className="w-full h-screen flex flex-col justify-between items-center py-12">
+    <div className="w-full flex flex-col gap-24 items-center  py-12">
       <div>
         <img src={logo} />
       </div>
-      <div className="h-[30rem]">
+      <div className="h-[30rem] mt-8">
         <p className="text-[5rem] font-light">
           W<span className="text-[#FCDF07]">E</span>LCOME
         </p>

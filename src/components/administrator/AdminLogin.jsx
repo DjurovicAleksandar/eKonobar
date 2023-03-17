@@ -97,6 +97,11 @@ function AdminLogin() {
           </form>
         </div>
       </div>
+      <div className="text-center text-[1.2rem] w-full p-4 mt-24">
+        <Link to="/">
+          <p className="">©EKONOBAR 2023</p>
+        </Link>
+      </div>
     </div>
   );
 }

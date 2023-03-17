@@ -24,8 +24,8 @@ function HotDrinks() {
   }, []);
 
   return (
-    <div className="h-full flex flex-col justify-between">
-      <div className=" h-[45rem] pt-12">
+    <div className="menuContainer p-4">
+      <div className=" h-[45rem] flex flex-col items-center mb-10 pt-12">
         <h2 className="text-center text-[2rem] font-light mb-3">
           Odab<span className="text-yellowCol">e</span>rite vrstu pića
         </h2>
@@ -58,12 +58,17 @@ function HotDrinks() {
           })}
         </ul>
       </div>
-      <button className="buttonBack hover:scale-110 active:scale-90 cursor-pointer">
+      <button className="buttonBack hover:scale-110 active:scale-90 cursor-pointer mb-12">
         <Link to="/">
-          <img src={back} className="w-5" alt="arrowBack" />
+          <img src={back} className="w-[2rem]" alt="arrowBack" />
           <span className="text-[1.5rem]"> Nazad</span>
         </Link>
       </button>
+      <div className="text-center text-[0.7rem] w-full p-4">
+        <Link to="/">
+          <p className="">©EKONOBAR 2023</p>{" "}
+        </Link>
+      </div>
     </div>
   );
 }

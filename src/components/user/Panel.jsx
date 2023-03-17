@@ -20,7 +20,7 @@ function Panel({ title }) {
   ];
   return (
     <div className="menuContainer p-4">
-      <div className="h-[45rem] flex flex-col justify-center items-center">
+      <div className="h-[45rem] flex flex-col justify-center items-center mb-10">
         <h2 className="text-center text-[2rem] font-light mb-3">
           Odab<span className="text-yellowCol">e</span>rite vrstu pića
         </h2>
@@ -48,6 +48,11 @@ function Panel({ title }) {
           <span className="text-[1.5rem]"> Nazad</span>
         </Link>
       </button>
+      <div className="text-center text-[0.7rem] w-full p-4 mt-14">
+        <Link to="/">
+          <p className="">©EKONOBAR 2023</p>{" "}
+        </Link>
+      </div>
     </div>
   );
 }

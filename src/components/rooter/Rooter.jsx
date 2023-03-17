@@ -33,9 +33,9 @@ const Root = () => {
       <div className="h-[80vh]  w-full">
         <Outlet />
       </div>
-      <div className="h-[10vh] w-full">
+      {/* <div className="h-[20vh] w-full">
         <Footer />
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -128,6 +128,13 @@ function OptionTemplate({ title, colon, menuHandler, saveChangesHandler }) {
           </Link>
         </div>
       </div>
+      <div className="text-center text-[0.7rem] w-full p-4 mt-16">
+        {" "}
+        <Link to="/">
+          {" "}
+          <p className="">©EKONOBAR 2023</p>{" "}
+        </Link>{" "}
+      </div>
     </div>
   );
 }
