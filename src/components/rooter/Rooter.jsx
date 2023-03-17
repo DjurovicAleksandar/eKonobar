@@ -28,11 +28,15 @@ const Root = () => {
   const location = useLocation();
   const loginLocation = location.pathname === "/caffe-login";
   return (
-    <>
-      {!loginLocation && <Navigation />}
-      <Outlet />
-      <Footer />
-    </>
+    <div className="h-screen w-full">
+      <div className="h-[10vh] w-full">{!loginLocation && <Navigation />}</div>
+      <div className="h-[80vh]  w-full">
+        <Outlet />
+      </div>
+      <div className="h-[10vh] w-full">
+        <Footer />
+      </div>
+    </div>
   );
 };
 

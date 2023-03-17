@@ -19,22 +19,22 @@ function Panel({ title }) {
     ["Cocktails", cocktail, "/cocktails"],
   ];
   return (
-    <div className="h-full flex flex-col justify-between">
-      <div className=" h-[450px] pt-12">
-        <h2 className="text-center text-[20px] font-light mb-3">
+    <div className="menuContainer p-4">
+      <div className="h-[45rem] flex flex-col justify-center items-center">
+        <h2 className="text-center text-[2rem] font-light mb-3">
           Odab<span className="text-yellowCol">e</span>rite vrstu pića
         </h2>
-        <ul className="w-[320px] text-center">
+        <ul className="w-[30rem] text-center">
           {options.map(([title, img, path], index) => {
             return (
               <Link to={path} key={index}>
-                <li className="w-full flex items-center border-[1px] h-[35px] px-[12px] py-[8px] mb-[12px] rounded-md text-[15px] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer">
+                <li className="w-full flex items-center border-[0.1rem] h-[3.5rem] px-[1.2rem] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer">
                   <img
-                    className="w-[20px] mr-2"
+                    className="w-[2rem] mr-2"
                     src={img}
                     alt={`${title} icon`}
                   />
-                  <div className="border-l-[1px] mr-2">&nbsp;</div>
+                  <div className="border-l-[0.1rem] mr-2">&nbsp;</div>
                   <p>{title}</p>
                 </li>
               </Link>
@@ -44,8 +44,8 @@ function Panel({ title }) {
       </div>
       <button className="buttonBack hover:scale-110 active:scale-90 cursor-pointer">
         <Link to="/">
-          <img src={back} className="w-[20px]" alt="arrowBack" />
-          <span className="text-[15px]"> Nazad</span>
+          <img src={back} className="w-[2rem]" alt="arrowBack" />
+          <span className="text-[1.5rem]"> Nazad</span>
         </Link>
       </button>
     </div>

@@ -43,57 +43,61 @@ function AdminLogin() {
   }, []);
 
   return (
-    <>
-      <Link to="/">
-        <img src={logo} />
-      </Link>
-      <div className="w-[300px] h-[220px] relative">
-        <form onSubmit={loginHandler}>
-          <input
-            onChange={(e) => {
-              if (e.target.value === "eKonobar__admin") {
-                setUserName("eKonobar__admin");
-                setEmail("ekonobar1@gmail.com");
-              }
-            }}
-            type="text"
-            className="w-full py-[13px] pl-[51px] text-[14px] pr-3 rounded-lg border-[1px] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[20px]"
-            placeholder="Vaše ime"
-            style={{
-              backgroundImage: `url(${userIcon})`,
-              backgroundPosition: "left 0.5rem center",
-              backgroundSize: "20px",
-              backgroundRepeat: "no-repeat",
-            }}
-            required
-            autoComplete={userName}
-          />
-          <input
-            ref={passwordRef}
-            value={password}
-            onChange={() => setPassword(passwordRef.current.value)}
-            type="password"
-            className="w-full py-[13px] pl-[51px] text-[14px] pr-3 rounded-lg border-[1px] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[40px]"
-            placeholder="Sigurnosni kod"
-            style={{
-              backgroundImage: `url(${lockIcon})`,
-              backgroundPosition: "left 0.5rem center",
-              backgroundSize: "20px",
-              backgroundRepeat: "no-repeat",
-            }}
-            required
-          />
-          <input
-            className=" bg-white text-black w-full h-[45px] rounded-lg text-center font-semibold text-[16px] active:scale-90 ease-in-out duration-300 cursor-pointer"
-            type="submit"
-            value="PRIJAVA"
-          />
-          <button className="cursor-pointer text-yellowCol text-[9px] font-medium absolute bottom-[-2px] right-0 active:scale-90">
-            Izgbili ste Vaš sigurnosni kod?
-          </button>
-        </form>
+    <div className="menuContainer p-4">
+      <div className="h-[45rem] flex flex-col items-center justify-between">
+        <div>
+          <Link to="/">
+            <img src={logo} />
+          </Link>
+        </div>
+        <div className="w-[30rem] h-[22rem] relative">
+          <form onSubmit={loginHandler}>
+            <input
+              onChange={(e) => {
+                if (e.target.value === "eKonobar__admin") {
+                  setUserName("eKonobar__admin");
+                  setEmail("ekonobar1@gmail.com");
+                }
+              }}
+              type="text"
+              className="w-full py-[1.3rem] pl-[5.1rem] text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[2rem]"
+              placeholder="Vaše ime"
+              style={{
+                backgroundImage: `url(${userIcon})`,
+                backgroundPosition: "left 0.5rem center",
+                backgroundSize: "2rem",
+                backgroundRepeat: "no-repeat",
+              }}
+              required
+              autoComplete={userName}
+            />
+            <input
+              ref={passwordRef}
+              value={password}
+              onChange={() => setPassword(passwordRef.current.value)}
+              type="password"
+              className="w-full py-[1.3rem] pl-[5.1rem] text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[4rem]"
+              placeholder="Sigurnosni kod"
+              style={{
+                backgroundImage: `url(${lockIcon})`,
+                backgroundPosition: "left 0.5rem center",
+                backgroundSize: "2rem",
+                backgroundRepeat: "no-repeat",
+              }}
+              required
+            />
+            <input
+              className=" bg-white text-black w-full h-[4.5rem] rounded-lg text-center font-semibold text-[1.6rem] active:scale-90 ease-in-out duration-300 cursor-pointer"
+              type="submit"
+              value="PRIJAVA"
+            />
+            <button className="cursor-pointer text-yellowCol text-[0.9rem] font-medium absolute bottom-[-0.2rem] right-0 active:scale-90">
+              Izgbili ste Vaš sigurnosni kod?
+            </button>
+          </form>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

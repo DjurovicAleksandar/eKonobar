@@ -25,30 +25,32 @@ function HotDrinks() {
 
   return (
     <div className="h-full flex flex-col justify-between">
-      <div className=" h-[450px] pt-12">
-        <h2 className="text-center text-[20px] font-light mb-3">
+      <div className=" h-[45rem] pt-12">
+        <h2 className="text-center text-[2rem] font-light mb-3">
           Odab<span className="text-yellowCol">e</span>rite vrstu pića
         </h2>
-        <ul className="w-[320px] h-[350px] overflow-y-auto p-4">
+        <ul className="w-[30rem] h-[35rem] overflow-y-auto p-4">
           {hotDrinks.map((item, index) => {
             return (
               <li
                 key={item.id}
-                className="flex justify-between gap-2 h-[65px] mb-2 text-[15px]"
+                className="flex justify-between gap-2 h-[6.5rem] mb-2 text-[1.5rem]"
               >
-                <div className="flex w-[300px] items-center">
+                <div className="flex w-[30rem] items-center">
                   <img
-                    className="w-[40px] mr-2"
+                    className="w-[4rem] mr-2"
                     src={coffee}
                     alt={item.ItemName}
                   />
                   <div>
-                    <h3 className="text-[12px]">{item.itemName}</h3>
-                    <p className="text-[9px] mr-3">{item.itemDescription}</p>
+                    <h3 className="text-[1.2rem]">{item.itemName}</h3>
+                    <p className="text-[0.9rem] mr-3">{item.itemDescription}</p>
                   </div>
-                  <p className="text-[14px]">{item?.itemPrice.toFixed(2)}KM</p>
+                  <p className="text-[1.4rem]">
+                    {item?.itemPrice.toFixed(2)}KM
+                  </p>
                 </div>
-                <button className="ml-1 w-[20px]  bg-white text-black cursor-pointer hover:scale-110 active:scale-90">
+                <button className="ml-1 w-[2rem]  bg-white text-black cursor-pointer hover:scale-110 active:scale-90">
                   +
                 </button>
               </li>
@@ -59,7 +61,7 @@ function HotDrinks() {
       <button className="buttonBack hover:scale-110 active:scale-90 cursor-pointer">
         <Link to="/">
           <img src={back} className="w-5" alt="arrowBack" />
-          <span className="text-[15px]"> Nazad</span>
+          <span className="text-[1.5rem]"> Nazad</span>
         </Link>
       </button>
     </div>

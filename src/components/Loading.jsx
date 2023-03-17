@@ -14,12 +14,12 @@ function Loading() {
   }, []);
 
   return (
-    <div className="w-full h-screen flex flex-col justify-between items-center pb-12">
+    <div className="w-full h-screen flex flex-col justify-between items-center py-12">
       <div>
         <img src={logo} />
       </div>
-      <div className="h-[300px]">
-        <p className="text-[55px] font-light">
+      <div className="h-[30rem]">
+        <p className="text-[5rem] font-light">
           W<span className="text-[#FCDF07]">E</span>LCOME
         </p>
         <div className="w-full bg-transparent h-1 rounded-full">
@@ -29,7 +29,7 @@ function Loading() {
           />
         </div>
       </div>
-      <p className="">©EKONOBAR 2023</p>
+      <p className="text-[1rem]">©EKONOBAR 2023</p>
     </div>
   );
 }

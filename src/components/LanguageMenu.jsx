@@ -19,7 +19,7 @@ function LanguageMenu({ languageChange }) {
       label: "Srpski",
       icon: (
         <img
-          className="w-[30px] rounded-full"
+          className="w-[3rem] rounded-full"
           src={serbian}
           alt="Serbian flag"
         />
@@ -30,7 +30,7 @@ function LanguageMenu({ languageChange }) {
       label: "Bosanski",
       icon: (
         <img
-          className="w-[30px] rounded-full"
+          className="w-[3rem] rounded-full"
           src={bosnian}
           alt="Bosnian flag"
         />
@@ -41,7 +41,7 @@ function LanguageMenu({ languageChange }) {
       label: "Hrvatski",
       icon: (
         <img
-          className="w-[30px] rounded-full"
+          className="w-[3rem] rounded-full"
           src={croatian}
           alt="Croatian flag"
         />
@@ -52,7 +52,7 @@ function LanguageMenu({ languageChange }) {
       label: "English",
       icon: (
         <img
-          className="w-[30px] rounded-full"
+          className="w-[3rem] rounded-full"
           src={english}
           alt="England flag"
         />
@@ -67,8 +67,11 @@ function LanguageMenu({ languageChange }) {
   }, [language]);
 
   return (
-    <div className="h-[300px] flex flex-col">
-      <label htmlFor="languages" className="font-light text-[23px] mb-[19px]">
+    <div className="menuContainer flex flex-col justify-center p-4">
+      <label
+        htmlFor="languages"
+        className="font-light text-[2.3rem] mb-[1.9rem] text-center"
+      >
         Odaberite jezik m<span className="text-[#FCDF07]">e</span>nija
       </label>
       <Select
@@ -80,7 +83,7 @@ function LanguageMenu({ languageChange }) {
         formatOptionLabel={({ label, icon }) => (
           <div className="flex items-center justify-start">
             {icon}
-            <span className="text-[21px] font-normal ml-2">{label}</span>
+            <span className="text-[2.3rem] font-normal ml-2">{label}</span>
           </div>
         )}
       />

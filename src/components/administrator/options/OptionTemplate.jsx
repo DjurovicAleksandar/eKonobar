@@ -59,69 +59,74 @@ function OptionTemplate({ title, colon, menuHandler, saveChangesHandler }) {
   }, []);
 
   return (
-    <div className="mt-2">
-      <h2 className="font-light text-[20px] text-center">
-        <span className="text-yellowCol">{title}</span>{" "}
-        {title === "Izmjena" && <span>detalja</span>}{" "}
-        {title === "Promjena" ? <span>cijene</span> : <span>artikla</span>}
-      </h2>
-      <Select
-        //  value={value}
-        onChange={(e) => {
-          menuHandler(e.value);
-          setValue(e.value);
-        }}
-        s
-        styles={customStyles}
-        className="text-black  w-[310px] sm:w-[390px] mb-[20px] mt-[10px]"
-        options={options}
-        placeholder="Odaberite kategoriju"
-        formatOptionLabel={({ label, icon }) => (
-          <div className="flex items-center justify-start">
-            <span className="text-[16px] font-normal ml-2">{label}</span>
-          </div>
-        )}
-      />
-      {value !== "" ? (
-        <>
-          <div className="w-[310px] sm:w-[390px] h-[300px] rounded-md overflow-y-scroll">
-            {colon}
-          </div>
-          <button className="active:scale-90 ease-in-out duration-300 cursor-pointer block mx-auto underline text-yellowCol text-[9px] font-medium mt-[20px]">
-            {title === "Izmjena"
-              ? "Pogledaj uputstvo za promjenu detalja artikla"
-              : title === "Promjena"
-              ? "Pogledaj uputstvo za promjene cijene artikla"
-              : title === "Brisanje"
-              ? "Pogledaj uputstvo za brisanje artikala"
-              : "Pogledaj uputstvo za dodavanje artikala"}
-          </button>
-        </>
-      ) : (
-        <></>
-      )}
-      <div className="flex items-center justify-around mt-[20px] text-[15px]">
-        {title === "Promjena" ? (
-          <button
-            type="submit"
-            form="change-price-form"
-            className="rounded-md bg-transparent text-center py-[10px] text-white border-[1px] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[120px] "
-          >
-            Sačuvaj
-          </button>
-        ) : (
-          <button
-            onClick={saveChangesHandler}
-            className="rounded-md bg-transparent text-center py-[10px] text-white border-[1px] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[120px] "
-          >
-            Sacuvaj
-          </button>
-        )}
-        <Link to="/administrator-page">
-          <button className="rounded-md bg-transparent text-center py-[10px] text-white border-[1px] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[120px] ">
-            Nazad
-          </button>
-        </Link>
+    <div className="menuContainer p-4">
+      <div className="flex flex-col items-center">
+        <div className="h-[42rem]">
+          <h2 className="font-light text-[2rem] text-center mb-5">
+            <span className="text-yellowCol">{title}</span>{" "}
+            {title === "Izmjena" && <span>detalja</span>}{" "}
+            {title === "Promjena" ? <span>cijene</span> : <span>artikla</span>}
+          </h2>
+          <Select
+            //  value={value}
+            isSearchable={false}
+            onChange={(e) => {
+              menuHandler(e.value);
+              setValue(e.value);
+            }}
+            s
+            styles={customStyles}
+            className="text-black  w-[30rem] sm:w-[39rem] mb-20"
+            options={options}
+            placeholder="Odaberite kategoriju"
+            formatOptionLabel={({ label, icon }) => (
+              <div className="flex items-center justify-start">
+                <span className="text-[1.5rem] font-normal ml-2">{label}</span>
+              </div>
+            )}
+          />
+          {value !== "" ? (
+            <>
+              <div className="w-[30rem] sm:w-[39rem] h-[25rem] rounded-md overflow-y-scroll">
+                {colon}
+              </div>
+              <button className="active:scale-90 ease-in-out duration-300 cursor-pointer block mx-auto underline text-yellowCol text-[0.9rem] font-medium mt-[2rem]">
+                {title === "Izmjena"
+                  ? "Pogledaj uputstvo za promjenu detalja artikla"
+                  : title === "Promjena"
+                  ? "Pogledaj uputstvo za promjene cijene artikla"
+                  : title === "Brisanje"
+                  ? "Pogledaj uputstvo za brisanje artikala"
+                  : "Pogledaj uputstvo za dodavanje artikala"}
+              </button>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div className="flex w-[30rem]  justify-between mt-[2rem] text-[1.3rem]">
+          {title === "Promjena" ? (
+            <button
+              type="submit"
+              form="change-price-form"
+              className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] "
+            >
+              Sačuvaj
+            </button>
+          ) : (
+            <button
+              onClick={saveChangesHandler}
+              className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] "
+            >
+              Sacuvaj
+            </button>
+          )}
+          <Link to="/administrator-page">
+            <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] ">
+              Nazad
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

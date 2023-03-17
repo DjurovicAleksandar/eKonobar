@@ -19,6 +19,7 @@
   }
   html {
     scroll-behavior: smooth;
+    font-size: 62.5%;
   }
 
   img {
@@ -43,5 +44,9 @@
   .buttonBack {
     display: block;
     margin: 0 auto;
+  }
+
+  .menuContainer {
+    height: 80vh;
   }
 }

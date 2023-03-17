@@ -39,36 +39,38 @@ function AdminPage({ menu }) {
   }, []);
 
   return (
-    <>
-      <h2 className="font-light text-[23px]">
-        Dobrodošli <span className="text-yellowCol">administrator</span>
-      </h2>
-      <ul className="w-[300px] text-center">
-        {options.map(([option, path], index) => {
-          return (
-            <Link to={path} key={index}>
-              <li className="w-full h-[45px] bg-white text-[#212121] py-[8px] mb-[12px] rounded-md text-[18px] hover:scale-110 active:scale-90 ease-in-out duration-300">
-                {option}
-              </li>
-            </Link>
-          );
-        })}
-      </ul>
+    <div className="menuContainer p-4">
+      <div className="h-[48rem] flex flex-col items-center justify-between">
+        <h2 className="font-light text-[2.3rem]">
+          Dobrodošli <span className="text-yellowCol">administrator</span>
+        </h2>
+        <ul className="w-[30rem] text-center">
+          {options.map(([option, path], index) => {
+            return (
+              <Link to={path} key={index}>
+                <li className="w-full h-[4.2rem] bg-white text-[#212121] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.8rem] hover:scale-110 active:scale-90 ease-in-out duration-300">
+                  {option}
+                </li>
+              </Link>
+            );
+          })}
+        </ul>
 
-      <button
-        onClick={openEmailClientHandler}
-        className="w-[300px] h-[45px] bg-white text-[#212121] py-[8px] mb-[12px] rounded-md text-[18px] hover:scale-110 active:scale-90 ease-in-out duration-300"
-      >
-        Kontaktirajte podršku
-      </button>
+        <button
+          onClick={openEmailClientHandler}
+          className="w-[30rem] h-[4.2rem] bg-white text-[#212121] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.8rem] hover:scale-110 active:scale-90 ease-in-out duration-300"
+        >
+          Kontaktirajte podršku
+        </button>
 
-      <button
-        onClick={logOut}
-        className="w-[150px] h-[45px] text-center bg-transparent py-[8px] text-[18px] border-[1px] rounder-md hover:scale-110 active:scale-90 ease-in-out duration-300"
-      >
-        Odjava
-      </button>
-    </>
+        <button
+          onClick={logOut}
+          className="w-[14rem] h-[4.2rem] text-center bg-transparent py-[0.8rem] text-[1.8rem] border-[0.1rem] rounder-md hover:scale-110 active:scale-90 ease-in-out duration-300"
+        >
+          Odjava
+        </button>
+      </div>
+    </div>
   );
 }
 
