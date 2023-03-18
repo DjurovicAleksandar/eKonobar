@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import Loading from "./components/Loading";
 import router from "./components/rooter/Rooter";
 
@@ -9,13 +9,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const setDataFilter = (data) => {
-      return data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-    };
-
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);

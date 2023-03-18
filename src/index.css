@@ -4,6 +4,11 @@
 @tailwind utilities;
 
 @layer components {
+  html {
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+  }
+
   * {
     padding: 0;
     margin: 0;
@@ -16,10 +21,6 @@
     background: url("./assets/imgs/background.png");
     font-family: "Montserrat", sans-serif;
     color: #ffff;
-  }
-  html {
-    scroll-behavior: smooth;
-    font-size: 62.5%;
   }
 
   img {
@@ -48,5 +49,10 @@
 
   .menuContainer {
     height: 80vh;
+  }
+
+  .modalBg {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
   }
 }

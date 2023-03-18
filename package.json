@@ -17,7 +17,8 @@
     "react-icons": "^4.8.0",
     "react-progressbar": "^1.2.0",
     "react-router-dom": "^6.8.2",
-    "react-select": "^5.7.0"
+    "react-select": "^5.7.0",
+    "react-switch": "^7.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

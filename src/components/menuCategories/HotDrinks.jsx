@@ -46,9 +46,7 @@ function HotDrinks() {
                     <h3 className="text-[1.2rem]">{item.itemName}</h3>
                     <p className="text-[0.9rem] mr-3">{item.itemDescription}</p>
                   </div>
-                  <p className="text-[1.4rem]">
-                    {item?.itemPrice.toFixed(2)}KM
-                  </p>
+                  <p className="text-[1.4rem]">{item?.itemPrice}KM</p>
                 </div>
                 <button className="ml-1 w-[2rem]  bg-white text-black cursor-pointer hover:scale-110 active:scale-90">
                   +

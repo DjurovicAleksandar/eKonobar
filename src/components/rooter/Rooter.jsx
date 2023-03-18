@@ -5,6 +5,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { useState } from "react";
 import AdminLogin from "../administrator/AdminLogin";
 import AdminPage from "../administrator/AdminPage";
 import AddArticle from "../administrator/options/AddArticle";
@@ -13,7 +14,6 @@ import ChangePrice from "../administrator/options/ChangePrice";
 import DetailsChange from "../administrator/options/DetailsChange";
 import Advertising from "../administrator/options/Advertising";
 import Home from "../Home";
-import Footer from "../navigation-footer/Footer";
 import Navigation from "../navigation-footer/Navigation";
 import ArticleDescription from "../administrator/options/ArticleDescription";
 
@@ -24,19 +24,43 @@ import SpecialOffer from "../user/SpecialOffer";
 import CarbonatedDrinks from "../menuCategories/carbonatedDrinks";
 import HotDrinks from "../menuCategories/HotDrinks";
 
+import Modal from "../helperComponents/Modal";
+
 const Root = () => {
   const location = useLocation();
   const loginLocation = location.pathname === "/caffe-login";
+
+  //modal control
+  const [showModal, setShowModal] = useState(false);
+  //saving name of the collection in database for a modal window
+  const [categoryID, setCategoryID] = useState("");
+
+  //index of clicked item, purpose - saves position of clicked item and when making a blueprin of menu
+  //position, with slice method it inesert element on wanted position
+  const [itemIndex, setItemIndex] = useState(0);
+
   return (
-    <div className="h-screen w-full">
-      <div className="h-[10vh] w-full">{!loginLocation && <Navigation />}</div>
-      <div className="h-[80vh]  w-full">
-        <Outlet />
-      </div>
-      {/* <div className="h-[20vh] w-full">
-        <Footer />
-      </div> */}
-    </div>
+    <>
+      {showModal && (
+        <Modal
+          categoryID={categoryID}
+          showModal={showModal}
+          setShowModal={setShowModal}
+          itemIndex={itemIndex}
+        />
+      )}
+      {!loginLocation && <Navigation />}
+      <Outlet
+        context={[
+          showModal,
+          setShowModal,
+          categoryID,
+          setCategoryID,
+          itemIndex,
+          setItemIndex,
+        ]}
+      />
+    </>
   );
 };
 

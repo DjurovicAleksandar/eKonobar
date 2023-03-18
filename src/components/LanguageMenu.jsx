@@ -77,6 +77,7 @@ function LanguageMenu({ languageChange }) {
           Odaberite jezik m<span className="text-[#FCDF07]">e</span>nija
         </label>
         <Select
+          isSearchable={false}
           value={language}
           onChange={setLanguage}
           styles={customStyles}

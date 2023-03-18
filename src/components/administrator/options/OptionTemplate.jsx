@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../config/firebase.js";
 import Select from "react-select";
+import Modal from "../../helperComponents/Modal.jsx";
 
 function OptionTemplate({ title, colon, menuHandler, saveChangesHandler }) {
   const [value, setValue] = useState("");
@@ -59,7 +60,7 @@ function OptionTemplate({ title, colon, menuHandler, saveChangesHandler }) {
   }, []);
 
   return (
-    <div className="menuContainer p-4">
+    <div className="menuContainer">
       <div className="flex flex-col items-center">
         <div className="h-[42rem]">
           <h2 className="font-light text-[2rem] text-center mb-5">

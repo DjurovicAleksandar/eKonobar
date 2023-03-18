@@ -18,7 +18,7 @@ function Loading() {
       <div>
         <img src={logo} />
       </div>
-      <div className="h-[30rem] mt-8">
+      <div className="h-[29rem] mt-8">
         <p className="text-[5rem] font-light">
           W<span className="text-[#FCDF07]">E</span>LCOME
         </p>

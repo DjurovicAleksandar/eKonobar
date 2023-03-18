@@ -20,7 +20,7 @@ function Panel({ title }) {
   ];
   return (
     <div className="menuContainer p-4">
-      <div className="h-[45rem] flex flex-col justify-center items-center mb-10">
+      <div className="h-[44rem] flex flex-col justify-center items-center mb-10">
         <h2 className="text-center text-[2rem] font-light mb-3">
           Odab<span className="text-yellowCol">e</span>rite vrstu pića
         </h2>
