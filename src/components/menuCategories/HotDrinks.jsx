@@ -1,11 +1,27 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { db } from "../config/firebase";
 import coffee from "../../assets/imgs/user/coffee.png";
 import back from "../../assets/imgs/user/back.png";
+import cokeBanner from "../../assets/imgs/banners/cocaColaBanner.png";
 
 function HotDrinks() {
+  const [
+    showModal,
+    setShowModal,
+    categoryID,
+    setCategoryID,
+    itemIndex,
+    setItemIndex,
+    checked,
+    setChecked,
+    selectedPositionOptions,
+    setSelectedPositionOptions,
+    selectedTypeOptions,
+    setSelectedTypeOptions,
+  ] = useOutletContext();
+
   const [hotDrinks, setHotDrinks] = useState([]);
 
   const getDrinks = async (e) => {
@@ -25,7 +41,12 @@ function HotDrinks() {
 
   return (
     <div className="menuContainer p-4">
-      <div className=" h-[45rem] flex flex-col items-center mb-10 pt-12">
+      <div
+        className=" h-[30rem] flex flex-col items-center mb-10 pt-12"
+        style={{
+          marginBottom: !checked && "11rem",
+        }}
+      >
         <h2 className="text-center text-[2rem] font-light mb-3">
           Odab<span className="text-yellowCol">e</span>rite vrstu pića
         </h2>
@@ -56,7 +77,16 @@ function HotDrinks() {
           })}
         </ul>
       </div>
-      <button className="buttonBack hover:scale-110 active:scale-90 cursor-pointer mb-12">
+      {checked && <img src={cokeBanner} className="mb-10" />}
+      <div className="flex items-center justify-around">
+        <button className="w-[13rem] bg-yellowCol text-base text-black h-[3rem] px-[1.2rem] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer">
+          Pozovi konobara
+        </button>
+        <button className="w-[13rem] bg-white text-base text-black h-[3rem] px-[1.2rem] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer">
+          Pogledaj listu
+        </button>
+      </div>
+      <button className="buttonBack hover:scale-110 active:scale-90 cursor-pointer mb-10">
         <Link to="/">
           <img src={back} className="w-[2rem]" alt="arrowBack" />
           <span className="text-[1.5rem]"> Nazad</span>

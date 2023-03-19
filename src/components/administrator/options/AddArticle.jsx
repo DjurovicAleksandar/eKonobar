@@ -1,7 +1,13 @@
 import add from "../../../assets/imgs/admin/add.png";
 import OptionTemplate from "./OptionTemplate";
 import { useEffect, useState } from "react";
-import { collection, doc, getDocs, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useOutletContext } from "react-router-dom";
 
@@ -18,20 +24,17 @@ function AddArticle() {
   const [bluePrint, setBluePrint] = useState([]);
 
   const menuHandler = async (e) => {
-    // const data = await getDocs(collection(db, e));
-
-    // const setDataFilter = data.docs.map((doc) => ({
-    //   ...doc.data(),
-    //   id: doc.id,
-    //   categoryID: e,
-    // }));
-
     onSnapshot(collection(db, e), (data) => {
       const setDataFilter = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
         categoryID: e,
       }));
+
+      console.log(
+        setDataFilter.filter((item) => item?.dataBaseBleprint)[0]
+          .dataBaseBleprint
+      );
 
       setBluePrint(
         setDataFilter.filter((item) => item?.dataBaseBleprint)[0]
@@ -53,12 +56,13 @@ function AddArticle() {
               return category.filter((ele) => ele.itemName === itemName);
             })
             .map((item, i) => {
+              if (item.length < 1) return;
               //If item is blueprint, we return back because it would create empty element
-              if (item[0].dataBaseBleprint) return;
+              if (item[0]?.dataBaseBleprint) return;
               return (
-                <div key={item[0].id} className="relative">
+                <div key={item[0]?.id} className="relative">
                   <li className="py-[0.5rem] pl-[1.2rem] border-b-[1px] text-[1rem] ">
-                    {item[0].itemName}
+                    {item[0]?.itemName}
                   </li>
                   <button
                     onClick={(e) => {

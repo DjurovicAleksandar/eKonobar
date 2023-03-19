@@ -1,12 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Switch from "react-switch";
 import Select from "react-select";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 import colaBanner from "../../../assets/imgs/banners/cocaColaBanner.png";
 import bannerRemove from "../../../assets/imgs/admin/bannerRemove.png";
+import { db } from "../../config/firebase";
+import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
 
 function Advertising() {
+  const [
+    showModal,
+    setShowModal,
+    categoryID,
+    setCategoryID,
+    itemIndex,
+    setItemIndex,
+    checked,
+    setChecked,
+    selectedPositionOptions,
+    setSelectedPositionOptions,
+    selectedTypeOptions,
+    setSelectedTypeOptions,
+  ] = useOutletContext();
+
   //select styling
   const customStyles = {
     dropdownIndicator: (provided, state) => ({
@@ -16,8 +33,8 @@ function Advertising() {
   };
 
   //select options
-  const options = [];
-  const positionPtions = [
+
+  const positionOptions = [
     { label: "Na svim stranicama", value: "everypage" },
     { label: "Na početnoj stranici", value: "firstpage" },
   ];
@@ -26,8 +43,13 @@ function Advertising() {
     { label: "Pop up banner", value: "popupBanner" },
   ];
 
-  const [checked, setChecked] = useState(false);
-  const handleChange = () => setChecked(!checked);
+  const handleChange = () => {
+    setChecked(!checked);
+    const configRef = doc(db, "config", "checkedState");
+    setDoc(configRef, {
+      checked: !checked,
+    });
+  };
 
   return (
     <div className="menuContainer">
@@ -36,7 +58,7 @@ function Advertising() {
           <h2 className="font-light text-[2rem] text-center mt-5">
             <span className="text-yellowCol">Banneri</span> i reklame
           </h2>
-          <div className="relative flex justify-between p-4 w-full">
+          <div className="relative flex justify-between p-4 w-full mb-3">
             <h3 className="font-light text-[1.5rem]">
               Omogući bannere i reklame
             </h3>
@@ -60,16 +82,20 @@ function Advertising() {
           </div>
           <div className="mb-12">
             <Select
-              //  value={value}
+              defaultValue={selectedPositionOptions}
+              options={positionOptions}
               isSearchable={false}
               onChange={(e) => {
-                console.log(e);
+                setSelectedPositionOptions(e);
+
+                const configRef = doc(db, "config", "bannerPositionState");
+
+                setDoc(configRef, {
+                  positionState: selectedPositionOptions,
+                });
               }}
-              s
               styles={customStyles}
               className="text-black w-[29rem] sm:w-[39rem] mb-4"
-              options={positionPtions}
-              placeholder="Odaberite poziciju banera"
               formatOptionLabel={({ label, icon }) => (
                 <div className="flex items-center justify-start">
                   <span className="text-[1.5rem] font-normal ml-2">
@@ -79,15 +105,20 @@ function Advertising() {
               )}
             />
             <Select
-              //  value={value}
+              defaultValue={selectedTypeOptions}
+              options={bannerType}
               isSearchable={false}
               onChange={(e) => {
-                console.log(e);
+                setSelectedTypeOptions(e);
+
+                const configRef = doc(db, "config", "bannerTypeState");
+
+                setDoc(configRef, {
+                  bannerType: selectedTypeOptions,
+                });
               }}
-              s
               styles={customStyles}
               className="text-black  w-[29rem] sm:w-[39rem]"
-              options={bannerType}
               placeholder="Odaberite vrstu bannera"
               formatOptionLabel={({ label, icon }) => (
                 <div className="flex items-center justify-start">
@@ -99,7 +130,7 @@ function Advertising() {
             />
           </div>
           <div className="text-center mb-20">
-            <button className="rounded-md bg-white text-black font-semibold text-center w-[20rem] h-[3rem] mb-2">
+            <button className="rounded-md bg-white text-black font-semibold text-center w-[20rem] h-[3rem] mb-2 hover:scale-110 active:scale-90 ease-in-out duration-300">
               DODAJ SLIKU
             </button>
             <p className="font-medium text-[0.5rem] text-yellowCol underline decoration-1 decoration-yellow-200/30">
@@ -107,7 +138,7 @@ function Advertising() {
             </p>
           </div>
           <div className="p-4 w-full">
-            <h2 className="font-light text-center mb-4">
+            <h2 className="font-light text-center mb-4 text-[1.4rem]">
               Banneri koji se prikazuju
             </h2>
             <div>
@@ -130,9 +161,11 @@ function Advertising() {
           Sacuvaj
         </button>
 
-        <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] ">
-          Nazad
-        </button>
+        <Link to="/administrator-page">
+          <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] ">
+            Nazad
+          </button>
+        </Link>
       </div>
       <div className="text-center text-white text-[0.7rem] w-full p-4 mt-6">
         <p className="">©EKONOBAR 2023</p>{" "}

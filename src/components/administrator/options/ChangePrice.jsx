@@ -62,6 +62,8 @@ function ChangePrice() {
           className=" h-[30px] "
         >
           {category.map((item, i) => {
+            if (item?.dataBaseBleprint) return;
+            if (item.length < 1) return;
             const roundClass =
               i === 0
                 ? "border-[1px] rounded-t-lg border-b-0 grow"

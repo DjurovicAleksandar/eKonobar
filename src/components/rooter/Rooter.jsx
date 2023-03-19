@@ -5,7 +5,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminLogin from "../administrator/AdminLogin";
 import AdminPage from "../administrator/AdminPage";
 import AddArticle from "../administrator/options/AddArticle";
@@ -25,6 +25,8 @@ import CarbonatedDrinks from "../menuCategories/carbonatedDrinks";
 import HotDrinks from "../menuCategories/HotDrinks";
 
 import Modal from "../helperComponents/Modal";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const Root = () => {
   const location = useLocation();
@@ -38,6 +40,25 @@ const Root = () => {
   //index of clicked item, purpose - saves position of clicked item and when making a blueprin of menu
   //position, with slice method it inesert element on wanted position
   const [itemIndex, setItemIndex] = useState(0);
+
+  //banner switch states for chekced-unchecked
+  const [checked, setChecked] = useState(false);
+
+  //State for selected option
+  const [selectedPositionOptions, setSelectedPositionOptions] = useState({});
+  const [selectedTypeOptions, setSelectedTypeOptions] = useState({});
+
+  useEffect(() => {
+    onSnapshot(collection(db, "config"), (data) => {
+      const dataFilter = data.docs.map((doc) => ({
+        ...doc.data(),
+      }));
+
+      setSelectedPositionOptions(dataFilter[0].positionState);
+      setSelectedTypeOptions(dataFilter[1].bannerType);
+      setChecked(dataFilter[2].checked);
+    });
+  }, [checked]);
 
   return (
     <>
@@ -58,6 +79,12 @@ const Root = () => {
           setCategoryID,
           itemIndex,
           setItemIndex,
+          checked,
+          setChecked,
+          selectedPositionOptions,
+          setSelectedPositionOptions,
+          selectedTypeOptions,
+          setSelectedTypeOptions,
         ]}
       />
     </>

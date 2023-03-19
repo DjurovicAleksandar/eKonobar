@@ -4,7 +4,13 @@ import { auth } from "../../config/firebase.js";
 import Select from "react-select";
 import Modal from "../../helperComponents/Modal.jsx";
 
-function OptionTemplate({ title, colon, menuHandler, saveChangesHandler }) {
+function OptionTemplate({
+  title,
+  colon,
+  menuHandler,
+  saveChangesHandler,
+  setCategory,
+}) {
   const [value, setValue] = useState("");
 
   //styles for select

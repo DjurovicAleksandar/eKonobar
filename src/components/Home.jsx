@@ -1,9 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import LanguageMenu from "./LanguageMenu";
 import back from "../assets/imgs/user/back.png";
+import cokeBanner from "../assets/imgs/banners/cocaColaBanner.png";
 
 function Home() {
+  const [
+    showModal,
+    setShowModal,
+    categoryID,
+    setCategoryID,
+    itemIndex,
+    setItemIndex,
+    checked,
+    setChecked,
+  ] = useOutletContext();
   const [language, setLanguage] = useState(true);
 
   const backToLanguageSelect = () => {
@@ -22,6 +33,8 @@ function Home() {
     ["Specijalna ponuda", "/special-offer"],
   ];
 
+  console.log(checked);
+
   return (
     <div>
       {language ? (
@@ -29,7 +42,12 @@ function Home() {
       ) : (
         <>
           <div className="menuContainer p-4">
-            <div className="h-[40rem] flex flex-col items-center justify-center  mb-28">
+            <div
+              className="h-[40rem] flex flex-col items-center justify-center"
+              style={{
+                marginBottom: !checked && "6.5rem",
+              }}
+            >
               <h2 className="font-light text-[2.3rem] text-center mb-3">
                 M<span className="text-yellowCol">e</span>nu
               </h2>
@@ -45,6 +63,7 @@ function Home() {
                 })}
               </ul>
             </div>
+            {checked && <img src={cokeBanner} />}
             <button
               className="buttonBack hover:scale-110 active:scale-90 cursor-pointer mb-10"
               onClick={backToLanguageSelect}

@@ -30,7 +30,9 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
     //pushing a copy of daabase new array position
 
     const databaseRef = doc(db, categoryID, "arrayPositionBlueprint");
-    const bluePrint = setDataFilter.map(({ itemName }) => itemName);
+    const bluePrint = setDataFilter
+      .filter((item) => !item.dataBaseBleprint)
+      .map(({ itemName }) => itemName);
 
     setDoc(databaseRef, { dataBaseBleprint: bluePrint });
 
@@ -42,7 +44,7 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
       itemDescription: itemDescription,
     });
 
-    setShowModal(false);
+    // setShowModal(false);
   };
   return (
     <div className="w-full h-full modalBg fixed flex items-center justify-center z-50 ">
