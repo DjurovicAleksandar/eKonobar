@@ -14,6 +14,16 @@ function Home() {
     setItemIndex,
     checked,
     setChecked,
+    selectedPositionOptions,
+    setSelectedPositionOptions,
+    selectedTypeOptions,
+    setSelectedTypeOptions,
+    showShopingList,
+    setShowShopingList,
+    shoppingList,
+    setShoppingList,
+    showPopUp,
+    setShowPopUp,
   ] = useOutletContext();
   const [language, setLanguage] = useState(true);
 
@@ -21,10 +31,16 @@ function Home() {
     setLanguage(true);
   };
 
-  const languageChange = (language) => {
-    console.log("first");
-    console.log(language);
+  const languageChange = (lng) => {
     setLanguage(false);
+    //Saving language preference to a local storage
+    localStorage.setItem(
+      "language",
+      JSON.stringify({
+        language: lng.value,
+        languageBoolean: false,
+      })
+    );
   };
 
   const options = [
@@ -33,7 +49,21 @@ function Home() {
     ["Specijalna ponuda", "/special-offer"],
   ];
 
-  console.log(checked);
+  useEffect(() => {
+    const languageObj = JSON.parse(localStorage.getItem("language")) || true;
+
+    setLanguage(languageObj.languageBoolean || languageObj);
+  }, []);
+
+  useEffect(() => {
+    console.log("first");
+    if (!language) {
+      console.log("second");
+      checked &&
+        selectedTypeOptions.value === "popupBanner" &&
+        setShowPopUp(true);
+    }
+  }, [language]);
 
   return (
     <div>
@@ -63,7 +93,11 @@ function Home() {
                 })}
               </ul>
             </div>
-            {checked && <img src={cokeBanner} />}
+            {checked &&
+              selectedPositionOptions.value === "everypage" &&
+              selectedTypeOptions.value === "staticBanner" && (
+                <img src={cokeBanner} />
+              )}
             <button
               className="buttonBack hover:scale-110 active:scale-90 cursor-pointer mb-10"
               onClick={backToLanguageSelect}

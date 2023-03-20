@@ -52,8 +52,8 @@ function Advertising() {
   };
 
   return (
-    <div className="menuContainer">
-      <div className="h-[42rem]">
+    <div className="menuContainer flex flex-col items-center">
+      <div className="h-[43rem]">
         <div className="flex flex-col items-center">
           <h2 className="font-light text-[2rem] text-center mt-5">
             <span className="text-yellowCol">Banneri</span> i reklame
@@ -80,19 +80,18 @@ function Advertising() {
               />
             </label>
           </div>
-          <div className="mb-12">
+          <div className="mb-8">
             <Select
               defaultValue={selectedPositionOptions}
               options={positionOptions}
               isSearchable={false}
               onChange={(e) => {
-                setSelectedPositionOptions(e);
-
                 const configRef = doc(db, "config", "bannerPositionState");
-
                 setDoc(configRef, {
-                  positionState: selectedPositionOptions,
+                  positionState: e,
                 });
+
+                setSelectedPositionOptions(e);
               }}
               styles={customStyles}
               className="text-black w-[29rem] sm:w-[39rem] mb-4"
@@ -109,13 +108,12 @@ function Advertising() {
               options={bannerType}
               isSearchable={false}
               onChange={(e) => {
-                setSelectedTypeOptions(e);
-
                 const configRef = doc(db, "config", "bannerTypeState");
-
                 setDoc(configRef, {
-                  bannerType: selectedTypeOptions,
+                  bannerType: e,
                 });
+
+                setSelectedTypeOptions(e);
               }}
               styles={customStyles}
               className="text-black  w-[29rem] sm:w-[39rem]"
@@ -157,9 +155,9 @@ function Advertising() {
         </p>
       </div>
       <div className="flex items-center justify-around mt-16">
-        <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] ">
+        {/* <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] ">
           Sacuvaj
-        </button>
+        </button> */}
 
         <Link to="/administrator-page">
           <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] ">

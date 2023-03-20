@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import carbonated from "../../assets/imgs/user/categories/carbonated.png";
 import cocktail from "../../assets/imgs/user/categories/cocktail.png";
 import energy from "../../assets/imgs/user/categories/energy.png";
@@ -9,6 +9,29 @@ import spirits from "../../assets/imgs/user/categories/spirits.png";
 import back from "../../assets/imgs/user/back.png";
 
 function Panel({ title }) {
+  const [
+    showModal,
+    setShowModal,
+    categoryID,
+    setCategoryID,
+    itemIndex,
+    setItemIndex,
+    checked,
+    setChecked,
+    selectedPositionOptions,
+    setSelectedPositionOptions,
+    selectedTypeOptions,
+    setSelectedTypeOptions,
+    showShopingList,
+    setShowShopingList,
+    shoppingList,
+    setShoppingList,
+    showPopUp,
+    setShowPopUp,
+    showWaiterModal,
+    setShowWaiterModal,
+  ] = useOutletContext();
+
   const options = [
     ["Topli napitci", hot, "/hotdrinks"],
     ["Gazirana pića", carbonated, "/carbonateddrinks"],
@@ -41,7 +64,10 @@ function Panel({ title }) {
             );
           })}
         </ul>
-        <button className="w-[30rem] bg-yellowCol text-base text-black h-[3.5rem] px-[1.2rem] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer mt-6">
+        <button
+          onClick={() => setShowWaiterModal(true)}
+          className="w-[30rem] bg-yellowCol text-base text-black h-[3.5rem] px-[1.2rem] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer mt-6"
+        >
           Pozovi konobara
         </button>
       </div>

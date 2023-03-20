@@ -48,6 +48,7 @@ function DetailsChange() {
           </div>
           {/*Button*/}
           <div className="flex flex-col justify-between">
+            
             {category.map((item, i) => {
               return (
                 <button

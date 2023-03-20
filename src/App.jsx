@@ -4,8 +4,6 @@ import Loading from "./components/Loading";
 import router from "./components/rooter/Rooter";
 
 function App() {
-  const [error, setError] = useState("");
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

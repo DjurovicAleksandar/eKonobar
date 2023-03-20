@@ -50,10 +50,10 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
     <div className="w-full h-full modalBg fixed flex items-center justify-center z-50 ">
       <div className="w-[30rem] h-[40rem] rounded-md  shadow-xl bg-black text-white relative flex flex-col  items-center justify-center">
         <button
-          className="absolute top-0 right-0"
-          onClick={() => setShowModal(false)}
+          onClick={(e) => setShowModal(false)}
+          className="border-black bg-white text-black px-4 py-2 rounded-full hover:scale-110 active:scale-90 ease-in-out duration-300 absolute top-[-1rem] right-[-1rem]"
         >
-          Close modal
+          X
         </button>
 
         <form
@@ -64,15 +64,15 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
           <input
             value={itemName}
             onChange={(e) => setItemName(e.target.value)}
-            className="w-full py-[1rem] pl-[5.1rem] text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[2rem]"
+            className="w-full py-[1rem]  px-10 text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[2rem]"
             placeholder="Naziv artikla"
             type="text"
             required
           />
-          <input
+          <textarea
             value={itemDescription}
             onChange={(e) => setItemDescription(e.target.value)}
-            className="w-full py-[1rem] pl-[5.1rem] text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[2rem]"
+            className="w-full py-[1rem]  px-10 text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[2rem]"
             placeholder="Opis artikla"
             type="text"
             required
@@ -80,7 +80,7 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
           <input
             value={itemPrice}
             onChange={(e) => setItemPrice(e.target.value)}
-            className="w-full py-[1rem] pl-[5.1rem] text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[2rem]"
+            className="w-full py-[1rem]  px-10 text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[2rem]"
             placeholder="Cijena artikla"
             type="number"
             required
@@ -93,9 +93,9 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
           >
             Sačuvaj artikal
           </button>
-          <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem]">
+          {/* <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem]">
             Nazad
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

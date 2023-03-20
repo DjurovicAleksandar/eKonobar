@@ -31,11 +31,6 @@ function AddArticle() {
         categoryID: e,
       }));
 
-      console.log(
-        setDataFilter.filter((item) => item?.dataBaseBleprint)[0]
-          .dataBaseBleprint
-      );
-
       setBluePrint(
         setDataFilter.filter((item) => item?.dataBaseBleprint)[0]
           .dataBaseBleprint
