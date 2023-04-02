@@ -59,4 +59,7 @@
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(1px);
   }
+  .drinks__layer {
+    backdrop-filter: blur(1px);
+  }
 }

@@ -20,6 +20,8 @@ function AddArticle() {
     itemIndex,
     setItemIndex,
   ] = useOutletContext();
+  //Category represents menu category, that we use to hook up database,
+  //Blue print is a blueprint of element position on the page
   const [category, setCategory] = useState([]);
   const [bluePrint, setBluePrint] = useState([]);
 

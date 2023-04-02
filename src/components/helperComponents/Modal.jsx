@@ -7,6 +7,7 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
   const [itemName, setItemName] = useState("");
   const [itemDescription, setItemDescription] = useState("");
   const [itemPrice, setItemPrice] = useState("");
+  const [itemShortDescription, setItemShortDescription] = useState("");
 
   const addNewItem = async (e) => {
     e.preventDefault();
@@ -24,6 +25,7 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
     setDataFilter.splice(itemIndex + +1, 0, {
       itemName: itemName,
       itemPrice: itemPrice,
+      itemShortDescription: itemShortDescription,
       itemDescription: itemDescription,
     });
 
@@ -40,18 +42,19 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
     const itemRef = doc(db, categoryID, itemName);
     setDoc(itemRef, {
       itemName: itemName,
-      itemPrice: itemPrice,
+      itemPrice: Number(itemPrice),
+      itemShortDescription: itemShortDescription,
       itemDescription: itemDescription,
     });
 
-    // setShowModal(false);
+    setShowModal(false);
   };
   return (
     <div className="w-full h-full modalBg fixed flex items-center justify-center z-50 ">
-      <div className="w-[30rem] h-[40rem] rounded-md  shadow-xl bg-black text-white relative flex flex-col  items-center justify-center">
+      <div className="border-[0.1rem] border-yellowCol w-[30rem] h-[50rem] rounded-2xl  shadow-xl bg-[#111217] text-white relative flex flex-col items-center pt-20">
         <button
           onClick={(e) => setShowModal(false)}
-          className="border-black bg-white text-black px-4 py-2 rounded-full hover:scale-110 active:scale-90 ease-in-out duration-300 absolute top-[-1rem] right-[-1rem]"
+          className="border-black bg-white text-black px-4 py-2 rounded-full hover:scale-110 active:scale-90 ease-in-out duration-300 absolute top-[0.4rem] right-[0.3rem]"
         >
           X
         </button>
@@ -59,43 +62,59 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
         <form
           onSubmit={addNewItem}
           id="modal_form"
-          className="text-white flex flex-col gap-2"
+          className="text-white flex flex-col gap-2 w-[24rem]"
         >
           <input
             value={itemName}
             onChange={(e) => setItemName(e.target.value)}
-            className="w-full py-[1rem]  px-10 text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[2rem]"
+            className="w-full py-[0.9rem]  px-10 text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[0.8rem]"
             placeholder="Naziv artikla"
+            type="text"
+            required
+          />
+          <input
+            value={itemShortDescription}
+            onChange={(e) => setItemShortDescription(e.target.value)}
+            className="w-full py-[0.9rem]  px-10 text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[0.8rem]"
+            placeholder="Kratki opis artikla ( 25 max )"
+            maxLength={25}
             type="text"
             required
           />
           <textarea
             value={itemDescription}
             onChange={(e) => setItemDescription(e.target.value)}
-            className="w-full py-[1rem]  px-10 text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[2rem]"
-            placeholder="Opis artikla"
+            className="resize-none h-[12rem] w-full py-[0.9rem]  px-10 text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[0.8rem]"
+            placeholder="Duži opis artikla"
             type="text"
             required
           />
           <input
             value={itemPrice}
             onChange={(e) => setItemPrice(e.target.value)}
-            className="w-full py-[1rem]  px-10 text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[2rem]"
+            className="w-full py-[0.9rem]  px-10 text-[1.4rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[0.8rem]"
             placeholder="Cijena artikla"
             type="number"
             required
           />
         </form>
-        <div className="flex w-full justify-around mt-8">
+        <div className="flex flex-col w-full items-center gap-10 mt-8">
+          <div className="flex flex-col items-center">
+            <button className="rounded-md bg-white text-center py-[0.9rem] text-black  ease-in-out duration-300 active:scale-90 cursor-pointer w-[24rem]">
+              Dodajte sliku artikla
+            </button>
+            <p className="text-xs underline text-yellowCol font-medium w-[25rem] text-center mt-1">
+              Sliku je moguće dodati samo iz baze fotografija e-konobar servisa
+              ukoliko želite dodati vlastite fotografije kontaktirajte podršku.
+            </p>
+          </div>
           <button
+            type="submit"
             form="modal_form"
-            className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem]"
+            className="rounded-md bg-yellowCol text-center py-[0.9rem] text-black ease-in-out duration-300 active:scale-90 cursor-pointer w-[24rem]"
           >
             Sačuvaj artikal
           </button>
-          {/* <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem]">
-            Nazad
-          </button> */}
         </div>
       </div>
     </div>

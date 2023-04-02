@@ -75,18 +75,21 @@ function CategoryTemplate({ category }) {
   return (
     <div className="menuContainer p-4 max-w-[35rem] mx-auto">
       <div
-        className=" h-[30rem] flex flex-col items-center mb-10 pt-12"
+        className="flex flex-col items-center pt-12 relative"
         style={{
-          marginBottom:
-            (!checked && "11rem") ||
-            (selectedPositionOptions.value === "firstpage" && "11rem") ||
-            (selectedTypeOptions.value === "popupBanner" && "11rem"),
+          height:
+            checked && selectedTypeOptions.value === "staticBanner"
+              ? "43rem"
+              : "48rem",
         }}
       >
+        <div className="drinks__layer absolute bottom-[0] w-full h-[6rem]  bg-gradient-to-t from-yellowCol/30 rounded-lg blur-xs">
+          &nbsp;
+        </div>
         <h2 className="text-center text-[2rem] font-light mb-3">
           Odab<span className="text-yellowCol">e</span>rite vrstu pića
         </h2>
-        <ul className="w-[31rem] h-[35rem] overflow-y-auto p-4">
+        <ul className="w-[31rem] h-[45rem] overflow-y-auto overflow-x-hidden p-4">
           {
             //Maping over blueprint and changing each of name with an object from the category.
             bluePrint
@@ -102,7 +105,7 @@ function CategoryTemplate({ category }) {
 
                 return (
                   <li
-                    key={item[0]?.id}
+                    key={item[0]?.id + i}
                     className="flex items-center gap-2 h-[4rem] mb-5 text-[1.5rem]"
                   >
                     <div className="flex w-[30rem] items-center border-[1px] rounded-lg">
@@ -114,7 +117,7 @@ function CategoryTemplate({ category }) {
                       <div className="w-[15rem]">
                         <h3 className="text-[1.2rem]">{item[0]?.itemName}</h3>
                         <p className="text-[0.9rem] mr-3">
-                          {item[0]?.itemDescription.slice(0, 25)}...
+                          {item[0]?.itemDescription.slice(0, 50)}.
                         </p>
                       </div>
                       <p className="text-[1.4rem]">
@@ -134,7 +137,6 @@ function CategoryTemplate({ category }) {
                           ]);
 
                           //saving list to the storage
-
                           localStorage.setItem(
                             "shoppingList",
                             JSON.stringify(shoppingList)
@@ -156,22 +158,23 @@ function CategoryTemplate({ category }) {
           }
         </ul>
       </div>
+
       {checked &&
         selectedPositionOptions.value === "everypage" &&
         selectedTypeOptions.value === "staticBanner" && (
-          <img src={cokeBanner} className="mb-10" />
+          <img className="absolute w-full bottom-0 left-0" src={cokeBanner} />
         )}
-      <div className="flex items-center justify-around">
-        <button
-          onClick={(e) => setShowWaiterModal(true)}
-          className="w-[13rem] bg-yellowCol text-base text-black h-[3rem] px-[1.2rem] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer"
-        >
-          Pozovi konobara
-        </button>
+      <div className="flex items-center justify-around mt-10">
         <div className="relative">
           <button
             onClick={() => setShowShopingList(true)}
             className="w-[13rem] bg-white text-base text-black h-[3rem] px-[1.2rem] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer"
+            style={{
+              marginTop:
+                selectedTypeOptions.value === "staticBanner"
+                  ? "0.1rem"
+                  : "0rem",
+            }}
           >
             Pogledaj listu
           </button>
@@ -181,20 +184,6 @@ function CategoryTemplate({ category }) {
             </p>
           ) : null}
         </div>
-      </div>
-      <button
-        onClick={() => {
-          navigate(-1);
-        }}
-        className="buttonBack hover:scale-110 active:scale-90 cursor-pointer mb-10"
-      >
-        <img src={back} className="w-[2rem]" alt="arrowBack" />
-        <span className="text-[1.5rem]"> Nazad</span>
-      </button>
-      <div className="text-center text-[0.7rem] w-full p-4">
-        <Link to="/">
-          <p className="">©EKONOBAR 2023</p>{" "}
-        </Link>
       </div>
     </div>
   );

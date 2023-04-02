@@ -12,12 +12,15 @@ function AdminPage({ menu }) {
     ["Promjena cijene", "/change-price"],
     ["Izmjena detalja artikla", "/change-details"],
     ["Banneri i reklame", "/advertising"],
+    ["Privremeno nedostupni artikli", "/disableditems"],
+    ["Super ponuda", "/addspecialoffer"],
   ];
 
   const openEmailClientHandler = () => {
-    window.open(
-      "mailto:@ekonobar1@gmail.com?subject=Naslov&body=Tekst%20Ide%20hovdje"
-    );
+    // window.open(
+    //   "mailto:@ekonobar1@gmail.com?subject=Naslov&body=Tekst%20Ide%20hovdje"
+    // );
+    navigate("/contactsupport");
   };
 
   const logOut = () => {
@@ -48,7 +51,7 @@ function AdminPage({ menu }) {
           {options.map(([option, path], index) => {
             return (
               <Link to={path} key={index}>
-                <li className="w-full h-[4.2rem] bg-white text-[#212121] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.8rem] hover:scale-110 active:scale-90 ease-in-out duration-300">
+                <li className="w-full h-[3.5rem] bg-white text-[#212121] py-[0.8rem] mb-[0.9rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300">
                   {option}
                 </li>
               </Link>
@@ -58,7 +61,7 @@ function AdminPage({ menu }) {
 
         <button
           onClick={openEmailClientHandler}
-          className="w-[30rem] h-[4.2rem] bg-white text-[#212121] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.8rem] hover:scale-110 active:scale-90 ease-in-out duration-300"
+          className="w-[30rem] h-[3.5rem] bg-white text-[#212121] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300"
         >
           Kontaktirajte podršku
         </button>

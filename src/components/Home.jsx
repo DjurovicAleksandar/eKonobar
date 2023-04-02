@@ -24,6 +24,10 @@ function Home() {
     setShoppingList,
     showPopUp,
     setShowPopUp,
+    showWaiterModal,
+    setShowWaiterModal,
+    selectedTimeoutOptions,
+    setSelectedTimeoutOptions,
   ] = useOutletContext();
   const [language, setLanguage] = useState(true);
 
@@ -56,18 +60,19 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    console.log("first");
     if (!language) {
-      console.log("second");
       checked &&
         selectedTypeOptions.value === "popupBanner" &&
         setShowPopUp(true);
+
+      //Timeout option for popUpBanner
+      setTimeout(() => setShowPopUp(false), selectedTimeoutOptions.value);
     }
   }, [language]);
 
   return (
     <div>
-      {language ? (
+      {!language ? (
         <LanguageMenu languageChange={languageChange} />
       ) : (
         <>
@@ -75,7 +80,9 @@ function Home() {
             <div
               className="h-[40rem] flex flex-col items-center justify-center"
               style={{
-                marginBottom: !checked && "6.5rem",
+                marginBottom:
+                  (!checked && "6.5rem") ||
+                  (selectedTypeOptions.value === "popupBanner" && "6.5rem"),
               }}
             >
               <h2 className="font-light text-[2.3rem] text-center mb-3">
@@ -93,13 +100,13 @@ function Home() {
                 })}
               </ul>
             </div>
-            {checked &&
-              selectedPositionOptions.value === "everypage" &&
-              selectedTypeOptions.value === "staticBanner" && (
-                <img src={cokeBanner} />
-              )}
+
             <button
               className="buttonBack hover:scale-110 active:scale-90 cursor-pointer mb-10"
+              style={{
+                marginTop:
+                  selectedTypeOptions.value === "staticBanner" && "6rem",
+              }}
               onClick={backToLanguageSelect}
             >
               <img src={back} className="w-[2rem]" alt="arrowBack" />
@@ -107,10 +114,18 @@ function Home() {
             </button>
 
             <div className="text-center text-[0.7rem] w-full p-4">
-              <Link to="/">
-                <p className="">©EKONOBAR 2023</p>{" "}
-              </Link>
+              {selectedTypeOptions.value !== "staticBanner" && (
+                <Link to="/">
+                  <p className="">©EKONOBAR 2023</p>{" "}
+                </Link>
+              )}
             </div>
+            {checked && selectedTypeOptions.value === "staticBanner" && (
+              <img
+                className="absolute w-full bottom-0 left-0"
+                src={cokeBanner}
+              />
+            )}
           </div>
         </>
       )}

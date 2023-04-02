@@ -16,6 +16,9 @@ import Advertising from "../administrator/options/Advertising";
 import Home from "../Home";
 import Navigation from "../navigation-footer/Navigation";
 import ArticleDescription from "../administrator/options/ArticleDescription";
+import TemporarilyUnavailableItems from "../administrator/options/TemporarilyUnavailableItems.jsx";
+import AddSpecialOffer from "../administrator/options/AddSpecialOffer";
+import AddSpecialOfferItem from "../administrator/options/SpecialOfferOptions/AddSpecialOfferItem";
 
 import FoodPanel from "../user/FoodPanel";
 import DrinksPanel from "../user/DrinksPanel";
@@ -36,6 +39,17 @@ import Energy from "../menuCategories/Drink/Energy";
 import ModalList from "../helperComponents/ModalList";
 import PopUp from "../helperComponents/PopUp";
 import CallAWaiterModal from "../helperComponents/CallAWaiterModal";
+import ChangeSpecialOfferItem from "../administrator/options/SpecialOfferOptions/ChangeSpecialOfferItem";
+import DeleteSpecialOfferItem from "../administrator/options/SpecialOfferOptions/DeleteSpecialOfferItem";
+import AddOneItem from "../administrator/options/SpecialOfferOptions/AddOneItem";
+import AddComboItemOne from "../administrator/options/SpecialOfferOptions/AddComboItemOne";
+import AddComboItemTwo from "../administrator/options/SpecialOfferOptions/AddComboItemTwo";
+import ChangeComboItemOne from "../administrator/options/SpecialOfferOptions/ChangeComboItemOne";
+import ChangeComboItemTwo from "../administrator/options/SpecialOfferOptions/ChangeComboItemTwo";
+import ChangeSpecialOfferSoloItem from "../administrator/options/SpecialOfferOptions/ChangeSpecialOfferSoloItem";
+import AddComboPrice from "../administrator/options/SpecialOfferOptions/AddComboPrice";
+import UpdateMenuOptions from "../administrator/options/SpecialOfferOptions/UpdateMenuOptions";
+import ContactAdmin from "../administrator/options/ContactAdmin";
 
 const Root = () => {
   const location = useLocation();
@@ -59,6 +73,7 @@ const Root = () => {
   //State for selected option
   const [selectedPositionOptions, setSelectedPositionOptions] = useState({});
   const [selectedTypeOptions, setSelectedTypeOptions] = useState({});
+  const [selectedTimeoutOptions, setSelectedTimeoutOptions] = useState({});
 
   //banner popup
   const [showPopUp, setShowPopUp] = useState(false);
@@ -75,8 +90,9 @@ const Root = () => {
       }));
 
       setSelectedPositionOptions(dataFilter[0].positionState);
-      setSelectedTypeOptions(dataFilter[1].bannerType);
-      setChecked(dataFilter[2].checked);
+      setSelectedTimeoutOptions(dataFilter[1].bannerTimeout);
+      setSelectedTypeOptions(dataFilter[2].bannerType);
+      setChecked(dataFilter[3].checked);
     });
   }, []);
 
@@ -151,6 +167,8 @@ const Root = () => {
           setShowPopUp,
           showWaiterModal,
           setShowWaiterModal,
+          selectedTimeoutOptions,
+          setSelectedTimeoutOptions,
         ]}
       />
     </>
@@ -160,15 +178,47 @@ const Root = () => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
+      {/* This is the first thing what user sees when he visit the app */}
       <Route index element={<Home />} />
+      {/* ADMIN LOGIN AND PANEL */}
       <Route path="/caffe-login" element={<AdminLogin />} />
       <Route path="/administrator-page" element={<AdminPage />} />
+      {/* ADMIN OPTIONS */}
       <Route path="/add-item" element={<AddArticle />} />
       <Route path="/delete-item" element={<DeleteArticle />} />
       <Route path="/change-price" element={<ChangePrice />} />
       <Route path="/change-details" element={<DetailsChange />} />
       <Route path="/editing-description" element={<ArticleDescription />} />
       <Route path="/advertising" element={<Advertising />} />
+      <Route path="/disableditems" element={<TemporarilyUnavailableItems />} />
+      <Route path="/addspecialoffer" element={<AddSpecialOffer />} />
+      <Route path="/contactsupport" element={<ContactAdmin />} />
+
+      {/* SPECIAL OFFER OPTIONS */}
+      <Route path="/addspecialofferitem" element={<AddSpecialOfferItem />} />
+      <Route
+        path="/changespecialofferitems"
+        element={<ChangeSpecialOfferItem />}
+      />
+      <Route path="/deletespecialoffer" element={<DeleteSpecialOfferItem />} />
+      {/* SPECIAL OFFER ADD ITEM COMPONENETS */}
+      <Route path="/addonespecialofferitem" element={<AddOneItem />} />
+      <Route path="/addComboItemOne" element={<AddComboItemOne />} />
+      <Route path="/addComboItemTwo" element={<AddComboItemTwo />} />
+      <Route path="/addComboPrice" element={<AddComboPrice />} />
+
+      {/* Update menu options */}
+      <Route path="/updatemenuoptions" element={<UpdateMenuOptions />} />
+
+      {/* Update speical offer items */}
+      <Route path="/updateComboItemOne" element={<ChangeComboItemOne />} />
+      <Route path="/updateComboItemTwo" element={<ChangeComboItemTwo />} />
+      <Route
+        path="/changeSpecialOfferSoloItem"
+        element={<ChangeSpecialOfferSoloItem />}
+      />
+
+      {/* MENU CATEGORIES */}
       <Route path="/food" element={<FoodPanel />} />
       <Route path="/drinks" element={<DrinksPanel />} />
       <Route path="/special-offer" element={<SpecialOffer />} />

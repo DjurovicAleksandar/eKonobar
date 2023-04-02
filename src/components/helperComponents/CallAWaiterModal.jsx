@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import popUpSound from "../../../public/popUpSound.wav";
+import popUpSound from "../../assets/sounds/popUpSound.wav";
 
 function CallAWaiterModal({ showWaiterModal, setShowWaiterModal }) {
   const audio = new Audio(popUpSound);
@@ -9,16 +9,26 @@ function CallAWaiterModal({ showWaiterModal, setShowWaiterModal }) {
   }, []);
   return (
     <div className="w-full h-full modalListBg fixed flex items-center justify-center z-50 ">
-      <div className="w-[20rem] h-[30rem] rounded-md shadow-xl bg-black p-2 relative flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center w-[30rem] h-[30rem] rounded-md shadow-xl bg-[#D9D9D9] p-2 relative">
+        <h2 className="text-black font-semibold text-[1.7rem] mt-[40%]">
+          POZIVA KONOBARA
+        </h2>
         <button
+          className="mt-[30%] bg-yellowCol text-black px-14 py-2 shadow-lg text-base rouned-md hover:scale-110 active:scale-90 ease-in-out duration-300"
           onClick={(e) => setShowWaiterModal(false)}
-          className="border-black bg-white text-black px-4 py-2 rounded-full hover:scale-110 active:scale-90 ease-in-out duration-300 absolute top-[-1rem] right-[-1rem]"
         >
-          X
+          Prihvati
         </button>
-        <h1 className="text-2xl text-center font-bold text-yellowCol border p-4 rounded-md">
-          Sto broj 1<br /> poziva konobara!
-        </h1>
+
+        <div
+          className="flex items-center justify-center font-bold text-[1.6rem] text-black
+        w-[20rem] h-[20rem] bg-yellowCol shadow-lg rounded-full hover:scale-110 active:scale-90 ease-in-out duration-300 absolute top-[-10rem] right-15"
+        >
+          <div className="relative">
+            <h4 className="absolute top-5 w-full text-center">STO BROJ</h4>
+            <h2 className="text-[10rem]">14</h2>
+          </div>
+        </div>
       </div>
     </div>
   );
