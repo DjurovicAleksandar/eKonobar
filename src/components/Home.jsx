@@ -101,7 +101,7 @@ function Home() {
               </ul>
             </div>
 
-            <button
+            {/* <button
               className="buttonBack hover:scale-110 active:scale-90 cursor-pointer mb-10"
               style={{
                 marginTop:
@@ -111,7 +111,7 @@ function Home() {
             >
               <img src={back} className="w-[2rem]" alt="arrowBack" />
               <span className="text-[1.5rem]"> Nazad</span>
-            </button>
+            </button> */}
 
             <div className="text-center text-[0.7rem] w-full p-4">
               {selectedTypeOptions.value !== "staticBanner" && (
@@ -122,7 +122,7 @@ function Home() {
             </div>
             {checked && selectedTypeOptions.value === "staticBanner" && (
               <img
-                className="absolute w-full bottom-0 left-0"
+                className="absolute w-full bottom-0 left-0 banner"
                 src={cokeBanner}
               />
             )}

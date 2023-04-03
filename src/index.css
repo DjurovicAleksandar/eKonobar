@@ -62,4 +62,8 @@
   .drinks__layer {
     backdrop-filter: blur(1px);
   }
+
+  .banner {
+    width: 300px;
+  }
 }

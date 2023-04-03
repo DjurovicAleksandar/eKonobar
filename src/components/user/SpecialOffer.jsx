@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import coffee from "../../assets/imgs/user/coffee.png";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -7,12 +7,48 @@ import { deleteWarning } from "../config/helperFunctions";
 
 function SpecialOffer({ btn, btnDel }) {
   const navigate = useNavigate();
+  const [
+    showModal,
+    setShowModal,
+    categoryID,
+    setCategoryID,
+    itemIndex,
+    setItemIndex,
+    checked,
+    setChecked,
+    selectedPositionOptions,
+    setSelectedPositionOptions,
+    selectedTypeOptions,
+    setSelectedTypeOptions,
+    showShopingList,
+    setShowShopingList,
+    shoppingList,
+    setShoppingList,
+  ] = useOutletContext();
 
   const [soloItem, setSoloItem] = useState({});
   const [comboItemOne, setComboItemOne] = useState({});
   const [comboItemTwo, setComboItemTwo] = useState({});
   const [itemComboPrice, setItemComboPrice] = useState({});
 
+  const [itemInList, setItemInList] = useState({});
+
+  //Add items to a shopping list handler
+  const addItemShoppingList = (item) => {
+    //pushing new item into shopping list
+    setShoppingList((prev) => [
+      ...prev,
+      {
+        itemName: item.itemName ? `Super ponuda` : "Combo ponuda",
+        itemPrice: Number(item.itemPrice),
+      },
+    ]);
+
+    //saving list to the storage
+    localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+  };
+
+  //Get items from database
   const getItems = async () => {
     const data = await getDocs(collection(db, "specialOfferItems"));
 
@@ -32,10 +68,23 @@ function SpecialOffer({ btn, btnDel }) {
     getItems();
   }, []);
 
+  useEffect(() => {
+    setItemInList(
+      shoppingList.reduce((acc, item) => {
+        if (acc[item.itemName]) {
+          acc[item.itemName]++;
+        } else {
+          acc[item.itemName] = 1;
+        }
+        return acc;
+      }, {})
+    );
+  }, [shoppingList]);
+
   return (
     <div className="menuContainer p-4 max-w-[35rem] mx-auto">
       <div className="flex flex-col items-center pt-12 relative">
-        <h2 className="font-light text-[2rem] text-center mb-20">
+        <h2 className="font-light text-[2rem] text-center">
           Sup
           <span className="text-yellowCol">e</span>r ponuda
         </h2>
@@ -83,13 +132,20 @@ function SpecialOffer({ btn, btnDel }) {
                   </div>
                 </div>
 
-                <div>
+                <div className="relative">
                   <button
-                    onClick={(e) => {}}
+                    onClick={(e) => {
+                      addItemShoppingList(itemComboPrice);
+                    }}
                     className="ml-1 w-[2rem] h-full bg-white text-black cursor-pointer hover:scale-110 active:scale-90 ease-in-out duration-300  rounded-md"
                   >
                     +
                   </button>
+                  {
+                    <p className="absolute top-[-0.5rem] left-[-0.5rem] bg-yellowCol text-black font-bold rounded-full px-[0.5rem] text-base">
+                      {itemInList["Combo ponuda"]}
+                    </p>
+                  }
                 </div>
               </div>
               <div className="flex justify-end">
@@ -152,13 +208,20 @@ function SpecialOffer({ btn, btnDel }) {
                   </div>
                 </div>
 
-                <div>
+                <div className="relative">
                   <button
-                    onClick={(e) => {}}
-                    className="ml-1 w-[2rem] h-full bg-white text-black cursor-pointer hover:scale-110 active:scale-90 rounded-md"
+                    onClick={(e) => {
+                      addItemShoppingList(soloItem);
+                    }}
+                    className="ml-1 w-[2rem] h-full bg-white text-black cursor-pointer hover:scale-110 active:scale-90 ease-in-out duration-300  rounded-md"
                   >
                     +
                   </button>
+                  {
+                    <p className="absolute top-[-0.5rem] left-[-0.5rem] bg-yellowCol text-black font-bold rounded-full px-[0.5rem] text-base">
+                      {itemInList["Super ponuda"]}
+                    </p>
+                  }
                 </div>
               </div>
               <div className="flex justify-end">
@@ -187,6 +250,19 @@ function SpecialOffer({ btn, btnDel }) {
               </div>
             </li>
           </ul>
+        </div>
+        <div className="relative">
+          <button
+            onClick={() => setShowShopingList(true)}
+            className="w-[13rem] bg-white text-base text-black h-[3rem] px-[1.2rem] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer"
+          >
+            Pogledaj listu
+          </button>
+          {shoppingList.length > 0 ? (
+            <p className="bg-yellowCol text-black rounded-full  px-3 py-1 absolute top-[-1rem] right-[-1rem] shadow-md font-bold">
+              {shoppingList.length}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

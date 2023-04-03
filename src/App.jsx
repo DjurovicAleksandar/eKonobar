@@ -17,7 +17,7 @@ function App() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="App">
+    <div className="App max-w-[40rem] mx-auto">
       <RouterProvider router={router} />
     </div>
   );
