@@ -104,7 +104,7 @@ function CategoryTemplate({ category }) {
                 : "48rem",
           }}
         >
-          <div className="drinks__layer absolute bottom-[0] w-full h-[6rem] rounded-lg blur-xs">
+          <div className="drinks__layer absolute bottom-[0] w-full h-[2.5rem] rounded-lg blur-xs">
             &nbsp;
           </div>
           <h2 className="text-center text-[2rem] font-light mb-3">
