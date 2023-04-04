@@ -1,7 +1,8 @@
 import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { db } from "../../../config/firebase";
+import { db, storage } from "../../../config/firebase";
+import { ref, uploadBytes } from "firebase/storage";
 
 function AddItemTemplate({ itemTitle, actionButtonCon, pageTitle, item }) {
   const navigate = useNavigate("");
@@ -9,7 +10,23 @@ function AddItemTemplate({ itemTitle, actionButtonCon, pageTitle, item }) {
   const [itemDescription, setItemDescription] = useState("");
   const [itemPrice, setItemPrice] = useState("");
   const [itemSpecialPrice, setItemSpecialPrice] = useState("");
+  const imgRefTitle =
+    itemTitle == 1
+      ? "ComboItemOne"
+      : itemTitle == 2
+      ? "ComboItemTwo"
+      : "superOffer";
 
+  //Image
+  const [imageUpload, setImageUpload] = useState(null);
+  //Image upload
+  const uploadImage = async () => {
+    if (imageUpload == null) return;
+    const imgRef = ref(storage, `specialOfferImgs/${imgRefTitle}`);
+    await uploadBytes(imgRef, imageUpload);
+  };
+
+  //Saving new item to data base
   const submitItem = (e) => {
     e.preventDefault();
 
@@ -26,25 +43,25 @@ function AddItemTemplate({ itemTitle, actionButtonCon, pageTitle, item }) {
       itemShortDescription: itemDescription.slice(0, 25),
       id: dtItemName,
     });
+    uploadImage();
 
-    // //For update page navigations
-    // item?.id === "ComboItemNumber1" && navigate("/updateComboItemTwo");
-    // item?.id === "ComboItemNumber2" && navigate("/addComboPrice");
-    // // item?.id === "soloSpecialItem" && navigate(-1);
+    // // //For update page navigations
+    // // item?.id === "ComboItemNumber1" && navigate("/updateComboItemTwo");
+    // // item?.id === "ComboItemNumber2" && navigate("/addComboPrice");
+    // // // item?.id === "soloSpecialItem" && navigate(-1);
 
-    //for add page navigations
-    !itemTitle && navigate(-1);
-    !item && itemTitle == 1 && navigate("/addComboItemTwo");
-    !item && itemTitle == 2 && navigate("/addComboPrice");
+    // //for add page navigations
+    // !itemTitle && navigate(-1);
+    // !item && itemTitle == 1 && navigate("/addComboItemTwo");
+    // !item && itemTitle == 2 && navigate("/addComboPrice");
+    navigate(-1);
   };
-
-  console.log(item);
 
   return (
     <div className="menuContainer">
       <div className="flex flex-col items-center">
         <div className="h-[42rem] flex flex-col items-center justify-between">
-          <h2 className="font-light text-[1.9rem] text-center w-4/5 my-5">
+          <h2 className="font-light text-[1.9rem] text-center w-4/5 my-10">
             {pageTitle === "Izmjena" ? (
               <span className="text-yellowCol">Izmjena </span>
             ) : (
@@ -60,7 +77,7 @@ function AddItemTemplate({ itemTitle, actionButtonCon, pageTitle, item }) {
           <form
             onSubmit={submitItem}
             id="addSpecialOfferOneItem"
-            className="w-[30rem]"
+            className="w-[30rem] mb-16"
           >
             <input
               value={itemName}
@@ -102,16 +119,25 @@ function AddItemTemplate({ itemTitle, actionButtonCon, pageTitle, item }) {
               required
               className=" w-full py-[1rem] pl-[2rem] text-[1.2rem] pr-3 rounded-lg border-[0.1rem] bg-transparent border-[#FFFFFF] focus:outline-none focus:border-yellowCol mb-[1rem]"
             />
+            <div className="flex flex-col items-center text-center">
+              <button className="w-[26rem] py-[1rem] pl-[2rem] text-[1.2rem] pr-3 rounded-lg  bg-white mb-[0.2rem] mt-[4rem] text-black ease-in-out duration-300 hover:scale-105 active:scale-95">
+                <label htmlFor="files">Dodajte sliku artikla</label>
+                <input
+                  required
+                  onChange={(e) => setImageUpload(e.target.files[0])}
+                  id="files"
+                  className="hidden"
+                  type="file"
+                />
+              </button>
+              <p className="text-yellowCol font-medium text-xs w-[90%] underline">
+                Sliku je moguće dodati samo iz baze fotografija e-konobar
+                servisa ukoliko želite dodati vlastite fotografije kontaktirajte
+                podršku.
+              </p>
+            </div>
           </form>
-          <div className="flex flex-col items-center text-center ">
-            <button className="w-[30rem] py-[1rem] pl-[2rem] text-[1.2rem] pr-3 rounded-lg  bg-white mb-[1rem] mt-[1.5rem] text-black">
-              Dodajte sliku artikla
-            </button>
-            <p className="text-yellowCol font-medium text-xs w-4/5 underline">
-              Sliku je moguće dodati samo iz baze fotografija e-konobar servisa
-              ukoliko želite dodati vlastite fotografije kontaktirajte podršku.
-            </p>
-          </div>
+
           {actionButtonCon}
           <div>
             {/* <button

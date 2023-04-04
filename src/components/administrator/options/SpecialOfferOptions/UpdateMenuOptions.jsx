@@ -13,7 +13,7 @@ function UpdateMenuOptions() {
     <div className="menuContainer">
       <div className="flex flex-col items-center">
         <div className="h-[30rem] flex flex-col items-center justify-between">
-          <h2 className="font-light text-[2rem] text-center  mt-10">
+          <h2 className="font-light text-[2rem] text-center  mt-28">
             <span className="text-yellowCol">Dodaj</span> super ponudu
           </h2>
           <ul className="w-[30rem] mt-32 text-center">
@@ -35,26 +35,23 @@ function UpdateMenuOptions() {
               );
             })}
           </ul>
-          <Link to="/special-offer">
-            <button className="w-[30rem] py-[1rem] pl-[2rem] text-[1.2rem] pr-3 rounded-lg bg-yellowCol text-black font-medium  mt-[6rem] hover:scale-110 active:scale-90 ease-in-out duration-300">
-              Pogledaj ponudu
-            </button>
-          </Link>
 
-          <div className="mt-[10rem]">
+          <button className="w-[30rem] py-[1rem] pl-[2rem] text-[1.2rem] pr-3 rounded-lg bg-yellowCol text-black font-medium  mt-[10rem] hover:scale-110 active:scale-90 ease-in-out duration-300">
+            <Link to="/special-offer">Pogledaj ponudu</Link>
+          </button>
+
+          {/* <div className="mt-[10rem]">
             <button
               onClick={(e) => navigate(-1)}
               className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] "
             >
               Nazad
             </button>
-          </div>
-          <div className="text-center text-[0.7rem] w-full p-4 ">
-            {" "}
-            <Link to="/">
-              {" "}
-              <p className="">©EKONOBAR 2023</p>{" "}
-            </Link>{" "}
+          </div> */}
+          <div className="text-center text-[0.7rem] w-full p-4 mt-24">
+            <p className="">
+              <Link to="/">©EKONOBAR 2023 </Link>
+            </p>
           </div>
         </div>
       </div>

@@ -69,7 +69,7 @@ function OptionTemplate({
     <div className="menuContainer">
       <div className="flex flex-col items-center">
         <div className="h-[42rem]">
-          <h2 className="font-light text-[2rem] text-center mb-5">
+          <h2 className="font-light text-[2rem] text-center my-10">
             <span className="text-yellowCol">{title}</span>{" "}
             {title === "Izmjena" && <span>detalja</span>}{" "}
             {title === "Promjena" ? <span>cijene</span> : <span>artikla</span>}
@@ -83,7 +83,7 @@ function OptionTemplate({
             }}
             s
             styles={customStyles}
-            className="text-black  w-[30rem] sm:w-[39rem] mb-20"
+            className="text-black  w-[30rem] sm:w-[39rem] mb-10"
             options={options}
             placeholder="Odaberite kategoriju"
             formatOptionLabel={({ label, icon }) => (
@@ -94,24 +94,25 @@ function OptionTemplate({
           />
           {value !== "" ? (
             <>
-              <div className="w-[30rem] sm:w-[39rem] h-[25rem] rounded-md overflow-y-scroll">
+              <div className="w-[30rem] sm:w-[39rem] h-[33rem] rounded-md overflow-y-scroll">
                 {colon}
               </div>
-              <button className="active:scale-90 ease-in-out duration-300 cursor-pointer block mx-auto underline text-yellowCol text-[0.9rem] font-medium mt-[2rem]">
-                {title === "Izmjena"
-                  ? "Pogledaj uputstvo za promjenu detalja artikla"
-                  : title === "Promjena"
-                  ? "Pogledaj uputstvo za promjene cijene artikla"
-                  : title === "Brisanje"
-                  ? "Pogledaj uputstvo za brisanje artikala"
-                  : "Pogledaj uputstvo za dodavanje artikala"}
-              </button>
             </>
           ) : (
             <></>
           )}
         </div>
-        <div className="flex w-[30rem]  justify-between mt-[2rem] text-[1.3rem]">
+
+        <div className="flex w-[30rem]  justify-between mt-[7rem] text-[1.3rem] relative">
+          <button className="active:scale-90 ease-in-out duration-300 cursor-pointer block mx-auto underline text-yellowCol text-[0.9rem] font-medium absolute left-0 right-0 top-[-1.6rem]">
+            {title === "Izmjena"
+              ? "Pogledaj uputstvo za promjenu detalja artikla"
+              : title === "Promjena"
+              ? "Pogledaj uputstvo za promjene cijene artikla"
+              : title === "Brisanje"
+              ? "Pogledaj uputstvo za brisanje artikala"
+              : "Pogledaj uputstvo za dodavanje artikala"}
+          </button>
           {title === "Promjena" ? (
             <button
               type="submit"
@@ -128,14 +129,13 @@ function OptionTemplate({
               Sacuvaj
             </button>
           )}
-          <Link to="/administrator-page">
-            <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] ">
-              Nazad
-            </button>
-          </Link>
+
+          <button className="rounded-md bg-transparent text-center py-[1rem] text-white border-[0.1rem] border-white ease-in-out duration-300 active:scale-90 cursor-pointer w-[12rem] ">
+            <Link to="/administrator-page"> Nazad</Link>
+          </button>
         </div>
       </div>
-      <div className="text-center text-[0.7rem] w-full p-4 mt-16">
+      <div className="text-center text-[0.7rem] w-full p-4  mt-1">
         {" "}
         <Link to="/">
           {" "}

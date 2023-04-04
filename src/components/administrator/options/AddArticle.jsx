@@ -45,6 +45,16 @@ function AddArticle() {
 
   const colon = (
     <div>
+      {bluePrint.length <= 0 && (
+        <button
+          onClick={(e) => {
+            setShowModal(true);
+            setItemIndex(0);
+          }}
+        >
+          Dodaj artikl
+        </button>
+      )}
       <ul className="w-[25rem] border-[0.1rem] rounded-md">
         {
           //Maping over blueprint and changing each of name with an object from the category.
@@ -53,7 +63,7 @@ function AddArticle() {
               return category.filter((ele) => ele.itemName === itemName);
             })
             .map((item, i) => {
-              if (item.length < 1) return;
+              if (item.length <= 0) return;
               //If item is blueprint, we return back because it would create empty element
               if (item[0]?.dataBaseBleprint) return;
               return (

@@ -9,11 +9,11 @@ function ChangeComboItemTwo() {
   const [item, setItem] = useState([]);
 
   const actionCon = (
-    <div className="flex justify-center gap-5 w-full my-10">
+    <div className="flex justify-center gap-5 w-full my-14">
       <button
         type="submit"
         form="addSpecialOfferOneItem"
-        className="w-[11rem] px-6 py-3 text-[1.2rem] rounded-lg  bg-yellowCol  text-black hover:scale-110 active:scale-90 ease-in-out duration-300"
+        className="w-[30rem] px-6 py-3 text-[1.2rem] rounded-lg  bg-yellowCol  text-black hover:scale-110 active:scale-90 ease-in-out duration-300"
       >
         Sačuvaj artikal
       </button>

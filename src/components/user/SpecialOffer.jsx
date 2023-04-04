@@ -2,8 +2,9 @@ import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import coffee from "../../assets/imgs/user/coffee.png";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../config/firebase";
+import { db, storage } from "../config/firebase";
 import { deleteWarning } from "../config/helperFunctions";
+import { getDownloadURL, listAll, ref } from "firebase/storage";
 
 function SpecialOffer({ btn, btnDel }) {
   const navigate = useNavigate();
@@ -32,6 +33,17 @@ function SpecialOffer({ btn, btnDel }) {
   const [itemComboPrice, setItemComboPrice] = useState({});
 
   const [itemInList, setItemInList] = useState({});
+
+  //image list
+
+  const superOferImgRef = ref(storage, "specialOfferImgs/superOffer");
+  const ComboItemOneImgRef = ref(storage, "specialOfferImgs/ComboItemOne");
+  const ComboItemTwoImgRef = ref(storage, "specialOfferImgs/ComboItemTwo");
+
+  const [imageList, setImageList] = useState("");
+  const [superRef, setSuperRef] = useState("");
+  const [comboOneRef, setComboOneRef] = useState("");
+  const [comboTwoRef, setComboTwoRef] = useState("");
 
   //Add items to a shopping list handler
   const addItemShoppingList = (item) => {
@@ -66,6 +78,16 @@ function SpecialOffer({ btn, btnDel }) {
 
   useEffect(() => {
     getItems();
+
+    getDownloadURL(superOferImgRef).then((url) => {
+      setSuperRef(url);
+    });
+    getDownloadURL(ComboItemOneImgRef).then((url) => {
+      setComboOneRef(url);
+    });
+    getDownloadURL(ComboItemTwoImgRef).then((url) => {
+      setComboTwoRef(url);
+    });
   }, []);
 
   useEffect(() => {
@@ -100,10 +122,10 @@ function SpecialOffer({ btn, btnDel }) {
                   <div className="w-[27rem] flex items-center justify-between border-[1px] rounded-lg p-2">
                     <img
                       className="w-[4rem] h-[4rem] mr-2"
-                      src={coffee}
+                      src={comboOneRef}
                       alt="ime"
                     />
-                    {}
+
                     <div className="w-[15rem]">
                       <h3 className="text-[1.2rem]">{comboItemOne.itemName}</h3>
                       <p className="text-[0.9rem] mr-3">
@@ -115,7 +137,7 @@ function SpecialOffer({ btn, btnDel }) {
                   <div className="flex w-[27rem] items-center justify-between border-[1px] rounded-lg p-2">
                     <img
                       className="w-[4rem] h-[4rem] mr-2"
-                      src={coffee}
+                      src={comboTwoRef}
                       alt="ime"
                     />
                     <div className="w-[15rem]">
@@ -195,9 +217,10 @@ function SpecialOffer({ btn, btnDel }) {
                   <div className="w-[27rem] flex items-center justify-between border-[1px] rounded-lg p-2">
                     <img
                       className="w-[4rem] h-[4rem] mr-2"
-                      src={coffee}
+                      src={superRef}
                       alt="ime"
                     />
+
                     <div className="w-[15rem]">
                       <h3 className="text-[1.2rem]">{soloItem.itemName}</h3>
                       <p className="text-[0.9rem] mr-3">
@@ -254,7 +277,7 @@ function SpecialOffer({ btn, btnDel }) {
         <div className="relative">
           <button
             onClick={() => setShowShopingList(true)}
-            className="w-[13rem] bg-white text-base text-black h-[3rem] px-[1.2rem] py-[0.8rem] mb-[1.2rem] rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer"
+            className="w-[13rem] bg-white text-base text-black h-[3rem] px-[1.2rem] py-[0.8rem] mt-14 rounded-md text-[1.5rem] hover:scale-110 active:scale-90 ease-in-out duration-300 cursor-pointer"
           >
             Pogledaj listu
           </button>

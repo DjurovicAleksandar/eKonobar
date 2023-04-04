@@ -36,7 +36,7 @@ function DetailsChange() {
           <div className="w-[55%] h-full border-[0.1rem] rounded-t-lg rounded-b-lg flex flex-col gap-3">
             {category.map((item, i) => {
               if (item?.dataBaseBleprint) return;
-              if (item.length < 1) return;
+              if (item.length <= 0) return;
               return (
                 <div key={item.id}>
                   <div className="py-[0.3rem] pl-[1.2rem] text-[1rem]  border-b-[0.1rem] h-[2.5rem]">
@@ -48,8 +48,8 @@ function DetailsChange() {
           </div>
           {/*Button*/}
           <div className="flex flex-col justify-between">
-            
             {category.map((item, i) => {
+              if (item?.dataBaseBleprint) return;
               return (
                 <button
                   id={i}

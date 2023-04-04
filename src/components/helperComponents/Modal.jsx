@@ -1,13 +1,23 @@
 import { useState } from "react";
-import { db } from "../config/firebase";
+import { db, storage } from "../config/firebase";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
+import { ref, uploadBytes } from "firebase/storage";
 
 function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
   const [itemName, setItemName] = useState("");
   const [itemDescription, setItemDescription] = useState("");
   const [itemPrice, setItemPrice] = useState("");
   const [itemShortDescription, setItemShortDescription] = useState("");
+
+  //image
+  const [imageUpload, setImageUpload] = useState(null);
+  //Image upload
+  const uploadImage = async (category, imageName) => {
+    if (imageUpload == null) return;
+    const imgRef = ref(storage, `${category}/${imageName}`);
+    await uploadBytes(imgRef, imageUpload);
+  };
 
   const addNewItem = async (e) => {
     e.preventDefault();
@@ -30,7 +40,6 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
     });
 
     //pushing a copy of daabase new array position
-
     const databaseRef = doc(db, categoryID, "arrayPositionBlueprint");
     const bluePrint = setDataFilter
       .filter((item) => !item.dataBaseBleprint)
@@ -46,6 +55,8 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
       itemShortDescription: itemShortDescription,
       itemDescription: itemDescription,
     });
+
+    uploadImage(categoryID, itemName);
 
     setShowModal(false);
   };
@@ -97,25 +108,35 @@ function Modal({ showModal, setShowModal, categoryID, itemIndex }) {
             type="number"
             required
           />
-        </form>
-        <div className="flex flex-col w-full items-center gap-10 mt-8">
           <div className="flex flex-col items-center">
             <button className="rounded-md bg-white text-center py-[0.9rem] text-black  ease-in-out duration-300 active:scale-90 cursor-pointer w-[24rem]">
-              Dodajte sliku artikla
+              <label htmlFor="add__file"> Dodajte sliku artikla</label>
+              <input
+                onChange={(e) => {
+                  e.preventDefault();
+                  setImageUpload(e.target.files[0]);
+                }}
+                required
+                id="add__file"
+                type="file"
+                className="hidden"
+              />
             </button>
             <p className="text-xs underline text-yellowCol font-medium w-[25rem] text-center mt-1">
               Sliku je moguće dodati samo iz baze fotografija e-konobar servisa
               ukoliko želite dodati vlastite fotografije kontaktirajte podršku.
             </p>
           </div>
-          <button
-            type="submit"
-            form="modal_form"
-            className="rounded-md bg-yellowCol text-center py-[0.9rem] text-black ease-in-out duration-300 active:scale-90 cursor-pointer w-[24rem]"
-          >
-            Sačuvaj artikal
-          </button>
-        </div>
+        </form>
+        {/* <div className="flex flex-col w-full items-center gap-10 mt-8"> */}
+        <button
+          type="submit"
+          form="modal_form"
+          className="rounded-md bg-yellowCol text-center py-[0.9rem] text-black ease-in-out duration-300 active:scale-90 cursor-pointer w-[24rem]  mt-12"
+        >
+          Sačuvaj artikal
+        </button>
+        {/* </div> */}
       </div>
     </div>
   );

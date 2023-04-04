@@ -1,11 +1,12 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
-import { db } from "../config/firebase";
+import { db, storage } from "../config/firebase";
 import coffee from "../../assets/imgs/user/coffee.png";
 import back from "../../assets/imgs/user/back.png";
 import cokeBanner from "../../assets/imgs/banners/cocaColaBanner.png";
 import DescriptionModal from "../helperComponents/DescriptionModal";
+import { getDownloadURL, ref } from "firebase/storage";
 
 function CategoryTemplate({ category }) {
   const navigate = useNavigate();
@@ -39,6 +40,12 @@ function CategoryTemplate({ category }) {
 
   const [showDescriptionModal, setShowDescriptionModal] = useState(false);
 
+  //imgs
+  const [imageUpload, setImageUpload] = useState({});
+
+  //Gettmg images from storage
+  const imageRef = (nameItem) => ref(storage, `${category}/${nameItem}`);
+
   //Add item to the shopping list
   const addItemShoppingList = (item) => {
     //pushing new item into shopping list
@@ -71,13 +78,27 @@ function CategoryTemplate({ category }) {
   };
 
   useEffect(() => {
+    //getting drink list
     getDrinks();
 
+    //Banner states on the page
     checked &&
       selectedPositionOptions.value === "everypage" &&
       selectedTypeOptions.value === "popupBanner" &&
       setShowPopUp(true);
   }, []);
+
+  useEffect(() => {
+    //setting images with getDownloadingUrl we get url for the image, and we return object with itemName as name of property
+    //And we use that object in image render to set src
+    drinksCategory.map((item) => {
+      if (item.dataBaseBleprint) return;
+      const imgName = item.itemName;
+      getDownloadURL(imageRef(item.itemName)).then((url) => {
+        setImageUpload((prev) => ({ ...prev, [imgName]: url }));
+      });
+    });
+  }, [drinksCategory]);
 
   useEffect(() => {
     setItemInList(
@@ -140,20 +161,20 @@ function CategoryTemplate({ category }) {
                       <div
                         onClick={(e) => {
                           setModalItem(item);
-                          // setModalItem(item[0]?.itemDescription);
+
                           setShowDescriptionModal(true);
                         }}
                         className="flex w-[30rem] items-center border-[1px] rounded-lg"
                       >
                         <img
-                          className="w-[4rem] h-[4rem] mr-2"
-                          src={coffee}
+                          className="w-[4rem] h-[4rem] mr-2 "
+                          src={imageUpload[item[0]?.itemName]}
                           alt={item[0]?.ItemName}
                         />
                         <div className="w-[15rem]">
                           <h3 className="text-[1.2rem]">{item[0]?.itemName}</h3>
                           <p className="text-[0.9rem] mr-3">
-                            {item[0]?.itemDescription.slice(0, 50)}.
+                            {item[0]?.itemShortDescription}.
                           </p>
                         </div>
                         <p className="text-[1.4rem]">
